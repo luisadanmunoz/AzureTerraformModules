@@ -1,0 +1,29 @@
+################################################################################
+# Local Values
+################################################################################
+
+locals {
+  # Naming convention: prefix-workload-environment-instance-suffix
+  # Example: queue-orders-prod-001
+  generated_name = join("-", compact([
+    var.name_prefix,
+    var.workload,
+    var.environment,
+    var.instance,
+    var.name_suffix
+  ]))
+
+  # Use explicit name if provided, otherwise use generated name
+  resource_name = var.name != null ? var.name : local.generated_name
+
+  # Determine if we are creating multiple queues via the queues map
+  use_multiple_queues = length(var.queues) > 0
+
+  # Merge default tags with user-provided tags
+  default_tags = {
+    "terraform-managed" = "true"
+    "module"            = "StorageQueue"
+  }
+
+  tags = merge(local.default_tags, var.tags)
+}
