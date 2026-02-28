@@ -140,7 +140,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "this" {
   max_pods              = each.value.max_pods
   mode                  = each.value.mode
   node_labels           = each.value.node_labels
-  node_taints           = each.value.node_taints
+  //node_taints           = each.value.node_taints
   priority              = each.value.priority
   spot_max_price        = each.value.priority == "Spot" ? each.value.spot_max_price : null
   eviction_policy       = each.value.priority == "Spot" ? each.value.eviction_policy : null
