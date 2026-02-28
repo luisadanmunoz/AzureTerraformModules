@@ -37,7 +37,7 @@ resource "azurerm_kubernetes_cluster" "this" {
     max_pods                     = var.default_node_pool.max_pods
     only_critical_addons_enabled = var.default_node_pool.only_critical_addons_enabled
     node_labels                  = var.default_node_pool.node_labels
-    node_taints                  = var.default_node_pool.node_taints
+    //node_taints                  = var.default_node_pool.node_taints
   }
 
   # Network Profile
