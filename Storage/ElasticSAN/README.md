@@ -279,3 +279,65 @@ This module has the following dependencies:
 ## License
 
 This module is maintained by the Cloud Infrastructure team.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_elastic_san.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/elastic_san) | resource |
+| [azurerm_elastic_san_volume.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/elastic_san_volume) | resource |
+| [azurerm_elastic_san_volume_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/elastic_san_volume_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_base_size_in_tib"></a> [base\_size\_in\_tib](#input\_base\_size\_in\_tib) | The base size of the Elastic SAN in TiB. Must be between 1 and 100. | `number` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to include in the generated name (e.g., dev, staging, prod). | `string` | `null` | no |
+| <a name="input_extended_size_in_tib"></a> [extended\_size\_in\_tib](#input\_extended\_size\_in\_tib) | The extended size of the Elastic SAN in TiB. Default is 0. | `number` | `0` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to include in the generated name. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the Elastic SAN will be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Elastic SAN. If provided, overrides the generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The prefix to use for the generated Elastic SAN name. | `string` | `"esan"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which to create the Elastic SAN. DEPENDENCY: Must be an existing resource group. | `string` | n/a | yes |
+| <a name="input_sku"></a> [sku](#input\_sku) | The SKU configuration for the Elastic SAN. | <pre>object({<br/>    name = string           # Premium_LRS or Premium_ZRS<br/>    tier = optional(string) # Optional tier specification<br/>  })</pre> | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the resources. | `map(string)` | `{}` | no |
+| <a name="input_volume_groups"></a> [volume\_groups](#input\_volume\_groups) | A map of volume groups to create within the Elastic SAN.<br/><br/>Each volume group object supports:<br/>- name: The name of the volume group<br/>- encryption\_type: The encryption type (EncryptionAtRestWithPlatformKey or EncryptionAtRestWithCustomerManagedKey)<br/>- encryption: Optional encryption configuration for customer-managed keys<br/>  - key\_vault\_key\_id: The Key Vault Key URI. DEPENDENCY: Must be an existing Key Vault key.<br/>  - user\_assigned\_identity\_id: The User Assigned Identity ID. DEPENDENCY: Must be an existing User Assigned Identity.<br/>- network\_rules: Optional network rules configuration<br/>  - virtual\_network\_rules: List of virtual network rules<br/>    - subnet\_id: The subnet ID. DEPENDENCY: Must be an existing subnet.<br/>    - action: The action (Allow)<br/>- protocol\_type: The protocol type (Iscsi or None) | <pre>map(object({<br/>    name            = string<br/>    encryption_type = optional(string, "EncryptionAtRestWithPlatformKey")<br/>    encryption = optional(object({<br/>      key_vault_key_id          = string<br/>      user_assigned_identity_id = optional(string)<br/>    }))<br/>    network_rules = optional(object({<br/>      virtual_network_rules = optional(list(object({<br/>        subnet_id = string<br/>        action    = optional(string, "Allow")<br/>      })), [])<br/>    }))<br/>    protocol_type = optional(string, "Iscsi")<br/>  }))</pre> | `{}` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | A map of volumes to create within volume groups.<br/><br/>Each volume object supports:<br/>- volume\_group\_key: The key of the volume group to create this volume in<br/>- name: The name of the volume<br/>- size\_in\_gib: The size of the volume in GiB<br/>- create\_source: Optional source configuration for the volume<br/>  - source\_id: The source ID. DEPENDENCY: Must be an existing snapshot or volume.<br/>  - source\_type: The source type (Disk, DiskRestorePoint, DiskSnapshot, VolumeSnapshot) | <pre>map(object({<br/>    volume_group_key = string<br/>    name             = string<br/>    size_in_gib      = number<br/>    create_source = optional(object({<br/>      source_id   = string<br/>      source_type = string<br/>    }))<br/>  }))</pre> | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to include in the generated name. | `string` | `null` | no |
+| <a name="input_zones"></a> [zones](#input\_zones) | The availability zones for the Elastic SAN. Valid values are '1', '2', or '3'. | `list(string)` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Elastic SAN. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Elastic SAN. |
+| <a name="output_total_iops"></a> [total\_iops](#output\_total\_iops) | The total IOPS of the Elastic SAN. |
+| <a name="output_total_mbps"></a> [total\_mbps](#output\_total\_mbps) | The total throughput in MBps of the Elastic SAN. |
+| <a name="output_total_size_in_tib"></a> [total\_size\_in\_tib](#output\_total\_size\_in\_tib) | The total size in TiB of the Elastic SAN. |
+| <a name="output_total_volume_size_in_gib"></a> [total\_volume\_size\_in\_gib](#output\_total\_volume\_size\_in\_gib) | The total volume size in GiB of the Elastic SAN. |
+| <a name="output_volume_group_ids"></a> [volume\_group\_ids](#output\_volume\_group\_ids) | A map of volume group names to their IDs. |
+| <a name="output_volume_groups"></a> [volume\_groups](#output\_volume\_groups) | A map of volume group details. |
+| <a name="output_volume_ids"></a> [volume\_ids](#output\_volume\_ids) | A map of volume names to their IDs. |
+| <a name="output_volumes"></a> [volumes](#output\_volumes) | A map of volume details. |
+<!-- END_TF_DOCS -->

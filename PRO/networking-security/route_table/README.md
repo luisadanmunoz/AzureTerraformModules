@@ -67,3 +67,42 @@ module "route_table" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de tablas de rutas en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_route_table.rt](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route_table) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_enable_route"></a> [enable\_route](#input\_enable\_route) | Habilitar rutas en la tabla de enrutamiento | `bool` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ ROUTE TABLE VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_routes"></a> [routes](#input\_routes) | Lista de rutas para la tabla de enrutamiento | <pre>list(object({<br/>    name                   = string<br/>    address_prefix         = string<br/>    next_hop_type          = string<br/>    next_hop_in_ip_address = string<br/>  }))</pre> | `[]` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ############################################################################ ROUTE TABLE OUTPUT ############################################################################ |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+<!-- END_TF_DOCS -->

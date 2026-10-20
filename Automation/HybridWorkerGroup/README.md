@@ -194,3 +194,49 @@ resource "azurerm_virtual_machine_extension" "hybrid_worker" {
 - **Automation Account** must exist
 - **Credential** must exist if `credential_name` is specified
 - **VM** must exist with Hybrid Worker extension installed before adding as worker
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_automation_hybrid_runbook_worker.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_hybrid_runbook_worker) | resource |
+| [azurerm_automation_hybrid_runbook_worker_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_hybrid_runbook_worker_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | (Required) The name of the Automation Account. DEPENDENCY: Automation Account must exist. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Hybrid Worker Groups. | `bool` | `true` | no |
+| <a name="input_hybrid_worker_groups"></a> [hybrid\_worker\_groups](#input\_hybrid\_worker\_groups) | (Optional) Map of Hybrid Worker Groups to create. The key is the group name.<br/>- credential\_name: (Optional) The name of the credential to use for the Hybrid Workers. DEPENDENCY: Credential must exist in the Automation Account. | <pre>map(object({<br/>    credential_name = optional(string, null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_hybrid_workers"></a> [hybrid\_workers](#input\_hybrid\_workers) | (Optional) Map of Hybrid Workers (Azure VMs) to add to groups. The key is a unique identifier.<br/>- group\_name: (Required) The name of the Hybrid Worker Group. Must match a key in hybrid\_worker\_groups or existing group.<br/>- vm\_resource\_id: (Required) The Azure Resource ID of the VM. DEPENDENCY: VM must exist with Hybrid Worker extension. | <pre>map(object({<br/>    group_name     = string<br/>    vm_resource_id = string<br/>  }))</pre> | `{}` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Automation Account exists. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_group_ids"></a> [group\_ids](#output\_group\_ids) | Map of Hybrid Worker Group names to their IDs. |
+| <a name="output_group_names"></a> [group\_names](#output\_group\_names) | List of created Hybrid Worker Group names. |
+| <a name="output_worker_ids"></a> [worker\_ids](#output\_worker\_ids) | Map of worker keys to their IDs. |
+| <a name="output_worker_ips"></a> [worker\_ips](#output\_worker\_ips) | Map of worker keys to their IP addresses. |
+| <a name="output_worker_last_seen"></a> [worker\_last\_seen](#output\_worker\_last\_seen) | Map of worker keys to their last seen timestamps. |
+<!-- END_TF_DOCS -->

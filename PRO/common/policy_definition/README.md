@@ -75,3 +75,50 @@ EOT
 ## Autor
 
 Este módulo ha sido desarrollado para la creación y asignación de políticas en Azure Management Groups.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group_policy_assignment.management_group_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_assignment) | resource |
+| [azurerm_policy_definition.policy_definition](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/policy_definition) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_description"></a> [description](#input\_description) | value of the description tag | `string` | n/a | yes |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | value of the display name tag | `string` | n/a | yes |
+| <a name="input_identity"></a> [identity](#input\_identity) | value of the identity tag | `bool` | n/a | yes |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | value of the identity ids tag | `set(string)` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | value of the location tag | `string` | n/a | yes |
+| <a name="input_management_group_id"></a> [management\_group\_id](#input\_management\_group\_id) | value of the management group id tag | `map` | `{}` | no |
+| <a name="input_mode"></a> [mode](#input\_mode) | value of the mode tag | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | value of the name tag | `string` | n/a | yes |
+| <a name="input_policy_rule"></a> [policy\_rule](#input\_policy\_rule) | value of the policy rule tag | `string` | n/a | yes |
+| <a name="input_policy_type"></a> [policy\_type](#input\_policy\_type) | value of the policy type tag | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id_assignment"></a> [id\_assignment](#output\_id\_assignment) | value of the id tag |
+| <a name="output_id_definition"></a> [id\_definition](#output\_id\_definition) | value of the id tag |
+| <a name="output_name_assignment"></a> [name\_assignment](#output\_name\_assignment) | value of the name tag |
+| <a name="output_name_definition"></a> [name\_definition](#output\_name\_definition) | value of the name tag |
+<!-- END_TF_DOCS -->

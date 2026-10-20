@@ -257,3 +257,59 @@ module "app_service_plan_per_site" {
 ## License
 
 This module is maintained by the Cloud Infrastructure team.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_service_plan.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_app_service_environment_id"></a> [app\_service\_environment\_id](#input\_app\_service\_environment\_id) | The ID of the App Service Environment to deploy the App Service Plan to. Required for Isolated (I) tier SKUs. | `string` | `null` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to include in the generated name (e.g., dev, staging, prod). | `string` | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to include in the generated name. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the App Service Plan will be created. | `string` | n/a | yes |
+| <a name="input_maximum_elastic_worker_count"></a> [maximum\_elastic\_worker\_count](#input\_maximum\_elastic\_worker\_count) | The maximum number of workers to use in an Elastic SKU Plan. Only valid for Elastic Premium (EP) SKUs. | `number` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The exact name to use for the App Service Plan. If provided, overrides generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to use for the generated App Service Plan name. | `string` | `"asp"` | no |
+| <a name="input_os_type"></a> [os\_type](#input\_os\_type) | The operating system type for the App Service Plan. Valid values are 'Linux', 'Windows', or 'WindowsContainer'. | `string` | n/a | yes |
+| <a name="input_per_site_scaling_enabled"></a> [per\_site\_scaling\_enabled](#input\_per\_site\_scaling\_enabled) | Whether per-site scaling is enabled for the App Service Plan. When enabled, apps can be scaled independently. | `bool` | `false` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group where the App Service Plan will be created. | `string` | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | The SKU name for the App Service Plan. Common values include B1, B2, B3, S1, S2, S3, P1v2, P2v2, P3v2, P1v3, P2v3, P3v3, P0v3, I1, I2, I3, I1v2, I2v2, I3v2, I4v2, I5v2, I6v2, F1, D1, Y1, EP1, EP2, EP3, WS1, WS2, WS3. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the App Service Plan. | `map(string)` | `{}` | no |
+| <a name="input_worker_count"></a> [worker\_count](#input\_worker\_count) | The number of workers (instances) to be allocated. Defaults to null for automatic scaling. | `number` | `null` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to include in the generated name. | `string` | `null` | no |
+| <a name="input_zone_balancing_enabled"></a> [zone\_balancing\_enabled](#input\_zone\_balancing\_enabled) | Whether zone balancing is enabled for the App Service Plan. Requires Premium v2/v3 or Isolated v2 SKUs in a zone-redundant region. | `bool` | `false` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the App Service Plan. |
+| <a name="output_kind"></a> [kind](#output\_kind) | The kind of the App Service Plan (e.g., 'linux', 'windows', 'elastic', 'functionapp'). |
+| <a name="output_name"></a> [name](#output\_name) | The name of the App Service Plan. |
+| <a name="output_os_type"></a> [os\_type](#output\_os\_type) | The operating system type of the App Service Plan. |
+| <a name="output_reserved"></a> [reserved](#output\_reserved) | Whether this is a reserved (Linux) App Service Plan. |
+<!-- END_TF_DOCS -->

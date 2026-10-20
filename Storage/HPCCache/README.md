@@ -256,3 +256,63 @@ resource "azurerm_subnet" "hpc_cache" {
 ## License
 
 This module is licensed under the MIT License.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_hpc_cache.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/hpc_cache) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automatically_rotate_key_to_latest_enabled"></a> [automatically\_rotate\_key\_to\_latest\_enabled](#input\_automatically\_rotate\_key\_to\_latest\_enabled) | Whether to automatically rotate the customer-managed key to the latest version. | `bool` | `false` | no |
+| <a name="input_cache_size_in_gb"></a> [cache\_size\_in\_gb](#input\_cache\_size\_in\_gb) | The size of the HPC Cache in GB. Valid values are: 3072, 6144, 12288, 21623, 24576, 43246, 49152, or 86491. | `number` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_default_access_policy"></a> [default\_access\_policy](#input\_default\_access\_policy) | The default access policy for the HPC Cache with access rules. | <pre>list(object({<br/>    scope                   = string<br/>    access                  = string<br/>    anonymous_uid           = optional(number)<br/>    anonymous_gid           = optional(number)<br/>    filter                  = optional(string)<br/>    root_squash_enabled     = optional(bool)<br/>    submount_access_enabled = optional(bool)<br/>    suid_enabled            = optional(bool)<br/>  }))</pre> | `null` | no |
+| <a name="input_directory_active_directory"></a> [directory\_active\_directory](#input\_directory\_active\_directory) | Active Directory configuration for the HPC Cache. | <pre>object({<br/>    dns_primary_ip      = string<br/>    domain_name         = string<br/>    cache_netbios_name  = string<br/>    domain_netbios_name = string<br/>    username            = string<br/>    password            = string<br/>    dns_secondary_ip    = optional(string)<br/>  })</pre> | `null` | no |
+| <a name="input_directory_flat_file"></a> [directory\_flat\_file](#input\_directory\_flat\_file) | Flat file directory configuration for the HPC Cache. | <pre>object({<br/>    group_file_uri    = string<br/>    password_file_uri = string<br/>  })</pre> | `null` | no |
+| <a name="input_directory_ldap"></a> [directory\_ldap](#input\_directory\_ldap) | LDAP directory configuration for the HPC Cache. | <pre>object({<br/>    server                             = string<br/>    base_dn                            = string<br/>    encrypted                          = optional(bool)<br/>    certificate_validation_uri         = optional(string)<br/>    download_certificate_automatically = optional(bool)<br/>    bind = optional(object({<br/>      dn       = string<br/>      password = string<br/>    }))<br/>  })</pre> | `null` | no |
+| <a name="input_dns"></a> [dns](#input\_dns) | DNS configuration for the HPC Cache. | <pre>object({<br/>    servers       = list(string)<br/>    search_domain = optional(string)<br/>  })</pre> | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name (e.g., dev, staging, prod). | `string` | `null` | no |
+| <a name="input_identity"></a> [identity](#input\_identity) | Managed identity configuration for the HPC Cache. | <pre>object({<br/>    type         = string<br/>    identity_ids = optional(list(string))<br/>  })</pre> | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier for the HPC Cache. | `string` | `null` | no |
+| <a name="input_key_vault_key_id"></a> [key\_vault\_key\_id](#input\_key\_vault\_key\_id) | The ID of the Key Vault Key to use for customer-managed key encryption. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the HPC Cache should be created. | `string` | n/a | yes |
+| <a name="input_mtu"></a> [mtu](#input\_mtu) | The MTU setting for the HPC Cache. Valid range is 576-1500. | `number` | `1500` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the HPC Cache. If provided, overrides the generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix for the generated HPC Cache name. | `string` | `"hpc"` | no |
+| <a name="input_ntp_server"></a> [ntp\_server](#input\_ntp\_server) | The NTP server IP address or FQDN for the HPC Cache. | `string` | `"time.windows.com"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which to create the HPC Cache. | `string` | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | The SKU of the HPC Cache. Valid values are: Standard\_2G, Standard\_4G, Standard\_8G, Standard\_L4\_5G, Standard\_L9G, or Standard\_L16G. | `string` | n/a | yes |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet where the HPC Cache will be deployed. The subnet must have the Microsoft.StorageCache service endpoint enabled. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name for the HPC Cache. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the HPC Cache. |
+| <a name="output_mount_addresses"></a> [mount\_addresses](#output\_mount\_addresses) | A list of IP addresses used by clients to mount the HPC Cache. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the HPC Cache. |
+<!-- END_TF_DOCS -->

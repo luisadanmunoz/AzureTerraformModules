@@ -127,3 +127,51 @@ module "governance_initiative" {
 3. **Organize with groups** - Use policy groups for better categorization and reporting
 4. **Apply at management group** - Define initiatives at highest appropriate scope
 5. **Version your initiatives** - Use metadata to track versions
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group_policy_set_definition.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_set_definition) | resource |
+| [azurerm_policy_set_definition.subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/policy_set_definition) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy set definition. | `string` | `null` | no |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name of the policy set definition. | `string` | n/a | yes |
+| <a name="input_management_group_id"></a> [management\_group\_id](#input\_management\_group\_id) | The ID of the Management Group where this policy set should be defined. If null, will be defined at subscription level. | `string` | `null` | no |
+| <a name="input_metadata"></a> [metadata](#input\_metadata) | The metadata JSON string for the policy set definition. | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy set definition (initiative). | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | The parameters JSON string for the policy set definition. | `string` | `null` | no |
+| <a name="input_policy_definition_groups"></a> [policy\_definition\_groups](#input\_policy\_definition\_groups) | Policy definition groups for organizing policies within the initiative. | <pre>list(object({<br/>    name                            = string<br/>    display_name                    = optional(string)<br/>    description                     = optional(string)<br/>    category                        = optional(string)<br/>    additional_metadata_resource_id = optional(string)<br/>  }))</pre> | `[]` | no |
+| <a name="input_policy_definitions"></a> [policy\_definitions](#input\_policy\_definitions) | List of policy definitions to include in the initiative. | <pre>list(object({<br/>    policy_definition_id = string<br/>    reference_id         = optional(string)<br/>    parameter_values     = optional(string)<br/>    policy_group_names   = optional(list(string))<br/>  }))</pre> | n/a | yes |
+| <a name="input_policy_type"></a> [policy\_type](#input\_policy\_type) | The policy type. Possible values are BuiltIn, Custom, NotSpecified, Static. | `string` | `"Custom"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Policy Set Definition. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Policy Set Definition. |
+<!-- END_TF_DOCS -->

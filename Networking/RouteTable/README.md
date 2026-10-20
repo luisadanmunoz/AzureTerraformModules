@@ -115,3 +115,57 @@ module "route_table" {
 1. **Disable BGP propagation** when using forced tunneling
 2. **Use Azure Firewall** or NVA for internet-bound traffic inspection
 3. **Document all routes** for compliance and troubleshooting
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route) | resource |
+| [azurerm_route_table.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route_table) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_bgp_route_propagation_enabled"></a> [bgp\_route\_propagation\_enabled](#input\_bgp\_route\_propagation\_enabled) | (Optional) Enable or disable BGP route propagation.<br/>Set to false to prevent learned routes from being added to the route table.<br/>Default is true. | `bool` | `true` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Route Table. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Environment name (e.g., dev, staging, prod). | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance identifier. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the Route Table will be deployed.<br/>DEPENDENCY: Should match the Resource Group location. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the Route Table. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix for generated name. | `string` | `"rt"` | no |
+| <a name="input_name_suffix"></a> [name\_suffix](#input\_name\_suffix) | (Optional) Suffix for generated name. | `string` | `""` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Route Table will be created.<br/>DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_routes"></a> [routes](#input\_routes) | (Optional) Map of routes to create in the Route Table.<br/><br/>Attributes:<br/>  - address\_prefix: The destination CIDR (e.g., "0.0.0.0/0", "10.0.0.0/8").<br/>  - next\_hop\_type: The type of next hop. Possible values:<br/>    - "VirtualNetworkGateway"<br/>    - "VnetLocal"<br/>    - "Internet"<br/>    - "VirtualAppliance"<br/>    - "None"<br/>  - next\_hop\_in\_ip\_address: The IP address of the next hop (required for VirtualAppliance).<br/>    DEPENDENCY: The NVA/Firewall must exist and be reachable. | <pre>map(object({<br/>    address_prefix         = string<br/>    next_hop_type          = string<br/>    next_hop_in_ip_address = optional(string, null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the Route Table. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) Workload name for naming convention. | `string` | `"default"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Route Table. |
+| <a name="output_location"></a> [location](#output\_location) | The Azure region. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Route Table. |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the Resource Group. |
+| <a name="output_route_ids"></a> [route\_ids](#output\_route\_ids) | Map of route names to their IDs. |
+| <a name="output_routes"></a> [routes](#output\_routes) | Map of route configurations. |
+<!-- END_TF_DOCS -->

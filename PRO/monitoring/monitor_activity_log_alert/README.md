@@ -47,3 +47,41 @@ module "monitor_activity_log_alert" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de alertas de actividad en Azure Monitor.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_activity_log_alert.monitor_activity_log_alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_action_group_id"></a> [action\_group\_id](#input\_action\_group\_id) | value of the action group id tag | `string` | n/a | yes |
+| <a name="input_category"></a> [category](#input\_category) | value of the category tag | `string` | n/a | yes |
+| <a name="input_description"></a> [description](#input\_description) | value of the description tag | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | value of the location tag | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | value of the name tag | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | value of the resource group name tag | `string` | n/a | yes |
+| <a name="input_scopes"></a> [scopes](#input\_scopes) | value of the scopes tag | `set(string)` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

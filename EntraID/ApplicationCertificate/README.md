@@ -141,3 +141,51 @@ module "app_cert_kv" {
 - Store private keys securely in Azure Key Vault or HSM
 - Use certificate-based authentication for service-to-service communication
 - Consider using managed identities instead when possible
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azuread_application_certificate.this](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_certificate) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_application_id"></a> [application\_id](#input\_application\_id) | The resource ID of the application for which this certificate should be created. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the application certificate. | `bool` | `true` | no |
+| <a name="input_encoding"></a> [encoding](#input\_encoding) | Specifies the encoding used for the supplied certificate data. Must be one of: pem, base64, or hex. | `string` | `"pem"` | no |
+| <a name="input_end_date"></a> [end\_date](#input\_end\_date) | The end date until which the certificate is valid, formatted as an RFC3339 date string (e.g. 2025-01-01T00:00:00Z). If not specified, defaults to 2 years from the start date. | `string` | `null` | no |
+| <a name="input_end_date_relative"></a> [end\_date\_relative](#input\_end\_date\_relative) | A relative duration for which the certificate is valid, for example 240h (10 days) or 2400h30m. Valid time units are ns, us, ms, s, m, h. | `string` | `null` | no |
+| <a name="input_key_id"></a> [key\_id](#input\_key\_id) | A UUID used to uniquely identify this certificate. If not specified, a UUID will be automatically generated. | `string` | `null` | no |
+| <a name="input_start_date"></a> [start\_date](#input\_start\_date) | The start date from which the certificate is valid, formatted as an RFC3339 date string (e.g. 2024-01-01T00:00:00Z). If not specified, the current date is used. | `string` | `null` | no |
+| <a name="input_type"></a> [type](#input\_type) | The type of key/certificate. Must be one of: AsymmetricX509Cert or Symmetric. Changing this forces a new resource. | `string` | `"AsymmetricX509Cert"` | no |
+| <a name="input_value"></a> [value](#input\_value) | The certificate data, which can be PEM encoded, base64 encoded DER, or hexadecimal encoded DER. See also the encoding argument. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_end_date"></a> [end\_date](#output\_end\_date) | The end date until which the certificate is valid. |
+| <a name="output_id"></a> [id](#output\_id) | The Terraform resource ID of the application certificate. |
+| <a name="output_key_id"></a> [key\_id](#output\_key\_id) | A UUID used to uniquely identify this certificate. |
+| <a name="output_start_date"></a> [start\_date](#output\_start\_date) | The start date from which the certificate is valid. |
+<!-- END_TF_DOCS -->

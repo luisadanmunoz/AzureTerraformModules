@@ -53,3 +53,44 @@ module "policy_assignment" {
 ## Autor
 
 Este módulo ha sido desarrollado para la asignación de políticas en Azure Management Groups.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group_policy_assignment.policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_assignment) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_description"></a> [description](#input\_description) | value of the description tag | `string` | n/a | yes |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | value of the display name tag | `string` | n/a | yes |
+| <a name="input_identity"></a> [identity](#input\_identity) | value of the identity tag | `bool` | n/a | yes |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | value of the identity ids tag | `set(string)` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | value of the location tag | `string` | n/a | yes |
+| <a name="input_management_group_id"></a> [management\_group\_id](#input\_management\_group\_id) | value of the management group id tag | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | value of the name tag | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | value of the parameters tag | `map` | `{}` | no |
+| <a name="input_policy_definition_id"></a> [policy\_definition\_id](#input\_policy\_definition\_id) | value of the policy definition id tag | `string` | `null` | no |
+| <a name="input_policy_type"></a> [policy\_type](#input\_policy\_type) | Tipo de política: 'definition' para una política única o 'set\_definition' para un conjunto de políticas | `string` | `"definition"` | no |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

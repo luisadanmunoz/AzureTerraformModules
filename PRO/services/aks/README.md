@@ -338,3 +338,49 @@ Para problemas o preguntas:
 3. Comprueba los permisos IAM
 4. Consulta la documentación de Azure AKS
 5. Contacta al equipo de Platform/DevOps
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster) | resource |
+| [azurerm_role_assignment.dns_zone_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
+| [azurerm_role_assignment.network_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_dns_prefix_private_cluster"></a> [dns\_prefix\_private\_cluster](#input\_dns\_prefix\_private\_cluster) | n/a | `string` | n/a | yes |
+| <a name="input_gateway_id"></a> [gateway\_id](#input\_gateway\_id) | n/a | `string` | n/a | yes |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | n/a | `set(string)` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ AKS ############################################################################ | `string` | n/a | yes |
+| <a name="input_node_resource_group"></a> [node\_resource\_group](#input\_node\_resource\_group) | n/a | `string` | n/a | yes |
+| <a name="input_principal_id_identity"></a> [principal\_id\_identity](#input\_principal\_id\_identity) | n/a | `string` | n/a | yes |
+| <a name="input_private_dns_zone_id"></a> [private\_dns\_zone\_id](#input\_private\_dns\_zone\_id) | n/a | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_scope_dns"></a> [scope\_dns](#input\_scope\_dns) | ############################################################################ ROLE ASSIGMENT - DNS y RG ############################################################################ | `string` | n/a | yes |
+| <a name="input_scope_rg"></a> [scope\_rg](#input\_scope\_rg) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | `{}` | no |
+| <a name="input_vnet_subnet_id"></a> [vnet\_subnet\_id](#input\_vnet\_subnet\_id) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

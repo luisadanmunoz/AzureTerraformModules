@@ -177,3 +177,56 @@ This module has the following external dependencies:
 - The Storage Account must have Hierarchical Namespace enabled (`is_hns_enabled = true`).
 - ACL entries define POSIX-like permissions for the filesystem and its paths.
 - The `owner` and `group` fields accept Azure Active Directory object IDs.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_storage_data_lake_gen2_filesystem.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_data_lake_gen2_filesystem) | resource |
+| [azurerm_storage_data_lake_gen2_path.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_data_lake_gen2_path) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_ace"></a> [ace](#input\_ace) | (Optional) List of Access Control Entries (ACL) for the Data Lake Gen2 Filesystem.<br/><br/>Attributes:<br/>  - scope:       (Optional) The scope of the ACE. Possible values: "access", "default". Defaults to "access".<br/>  - type:        (Required) The type of the ACE. Possible values: "user", "group", "mask", "other".<br/>  - id:          (Optional) The Azure Active Directory object ID for the user or group. Required when type is "user" or "group".<br/>  - permissions: (Required) The permissions string (e.g., "rwx", "r-x", "---"). | <pre>list(object({<br/>    scope       = optional(string, "access")<br/>    type        = string<br/>    id          = optional(string, null)<br/>    permissions = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Data Lake Gen2 Filesystem. Set to false to disable resource creation without removing module code. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) The environment name (e.g., dev, staging, prod), used for naming convention. | `string` | `"dev"` | no |
+| <a name="input_group"></a> [group](#input\_group) | (Optional) The Azure Active Directory object ID of the owning group of the Filesystem. | `string` | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number or identifier for naming convention. | `string` | `"001"` | no |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the Data Lake Gen2 Filesystem. If provided, overrides name\_prefix/name\_suffix logic. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix to prepend to the generated Filesystem name. Used when 'name' is not provided. | `string` | `"dlfs"` | no |
+| <a name="input_name_suffix"></a> [name\_suffix](#input\_name\_suffix) | (Optional) Suffix to append to the generated Filesystem name. Used when 'name' is not provided. | `string` | `""` | no |
+| <a name="input_owner"></a> [owner](#input\_owner) | (Optional) The Azure Active Directory object ID of the owner of the Filesystem. | `string` | `null` | no |
+| <a name="input_paths"></a> [paths](#input\_paths) | (Optional) Map of paths (directories) to create within the Data Lake Gen2 Filesystem.<br/>DEPENDENCY: The Data Lake Gen2 Filesystem must be created before paths can be added.<br/><br/>Attributes:<br/>  - path:     (Required) The path to create within the filesystem.<br/>  - resource: (Optional) The type of resource. Defaults to "directory".<br/>  - owner:    (Optional) The Azure Active Directory object ID of the owner.<br/>  - group:    (Optional) The Azure Active Directory object ID of the owning group.<br/>  - ace:      (Optional) List of ACL entries for this path. | <pre>map(object({<br/>    path     = string<br/>    resource = optional(string, "directory")<br/>    owner    = optional(string, null)<br/>    group    = optional(string, null)<br/>    ace = optional(list(object({<br/>      scope       = optional(string, "access")<br/>      type        = string<br/>      id          = optional(string, null)<br/>      permissions = string<br/>    })), [])<br/>  }))</pre> | `{}` | no |
+| <a name="input_properties"></a> [properties](#input\_properties) | (Optional) A map of custom properties to associate with the Data Lake Gen2 Filesystem. | `map(string)` | `{}` | no |
+| <a name="input_storage_account_id"></a> [storage\_account\_id](#input\_storage\_account\_id) | (Required) The ID of the Storage Account where the Data Lake Gen2 Filesystem will be created.<br/>DEPENDENCY: Storage Account with is\_hns\_enabled=true must exist before creating this resource. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the resources. These are merged with default module tags. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) The workload or application name, used for naming convention. | `string` | `"shared"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Data Lake Gen2 Filesystem. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Data Lake Gen2 Filesystem. |
+| <a name="output_path_ids"></a> [path\_ids](#output\_path\_ids) | Map of path keys to their resource IDs. |
+<!-- END_TF_DOCS -->

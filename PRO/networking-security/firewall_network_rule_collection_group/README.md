@@ -55,3 +55,44 @@ module "firewall_network_rule_collection_group" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de reglas de red en una política de firewall en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_firewall_policy_rule_collection_group.firewall_network_rule_collection_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_action"></a> [action](#input\_action) | n/a | `string` | n/a | yes |
+| <a name="input_destination_addresses"></a> [destination\_addresses](#input\_destination\_addresses) | n/a | `list(string)` | n/a | yes |
+| <a name="input_destination_ports"></a> [destination\_ports](#input\_destination\_ports) | n/a | `list(string)` | n/a | yes |
+| <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ AZURE FIREWALL POLICY RULE COLLECTION GROUP VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_network_rule_collection"></a> [name\_network\_rule\_collection](#input\_name\_network\_rule\_collection) | n/a | `string` | n/a | yes |
+| <a name="input_name_rule"></a> [name\_rule](#input\_name\_rule) | n/a | `string` | n/a | yes |
+| <a name="input_priority"></a> [priority](#input\_priority) | n/a | `string` | n/a | yes |
+| <a name="input_priority_network_rule_collection"></a> [priority\_network\_rule\_collection](#input\_priority\_network\_rule\_collection) | n/a | `string` | n/a | yes |
+| <a name="input_protocols"></a> [protocols](#input\_protocols) | n/a | `list(string)` | n/a | yes |
+| <a name="input_source_addresses"></a> [source\_addresses](#input\_source\_addresses) | n/a | `list(string)` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

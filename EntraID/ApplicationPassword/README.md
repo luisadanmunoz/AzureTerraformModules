@@ -150,3 +150,52 @@ module "app_secret_secondary" {
 - Consider using remote state with encryption enabled
 - Rotate secrets before they expire to avoid service disruptions
 - Audit and remove unused secrets regularly
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azuread_application_password.this](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_application_id"></a> [application\_id](#input\_application\_id) | The resource ID of the application for which this password should be created. Use either application\_id or application\_object\_id. | `string` | `null` | no |
+| <a name="input_application_object_id"></a> [application\_object\_id](#input\_application\_object\_id) | The object ID of the application for which this password should be created. Use either application\_id or application\_object\_id. | `string` | `null` | no |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the application password. | `bool` | `true` | no |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | A display name for the password. If not specified, a random name will be generated. | `string` | `null` | no |
+| <a name="input_end_date"></a> [end\_date](#input\_end\_date) | The end date until which the password is valid, formatted as an RFC3339 date string (e.g. 2025-01-01T00:00:00Z). If not specified, defaults to 2 years from creation. | `string` | `null` | no |
+| <a name="input_end_date_relative"></a> [end\_date\_relative](#input\_end\_date\_relative) | A relative duration for which the password is valid, for example 240h (10 days) or 2400h30m. Valid time units are ns, us, ms, s, m, h. | `string` | `null` | no |
+| <a name="input_rotate_when_changed"></a> [rotate\_when\_changed](#input\_rotate\_when\_changed) | A map of values that, when changed, will trigger rotation of the password. | `map(string)` | `null` | no |
+| <a name="input_start_date"></a> [start\_date](#input\_start\_date) | The start date from which the password is valid, formatted as an RFC3339 date string (e.g. 2024-01-01T00:00:00Z). If not specified, the current date is used. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_display_name"></a> [display\_name](#output\_display\_name) | The display name of the password. |
+| <a name="output_end_date"></a> [end\_date](#output\_end\_date) | The end date until which the password is valid. |
+| <a name="output_id"></a> [id](#output\_id) | The Terraform resource ID of the application password. |
+| <a name="output_key_id"></a> [key\_id](#output\_key\_id) | A UUID used to uniquely identify this password credential. |
+| <a name="output_start_date"></a> [start\_date](#output\_start\_date) | The start date from which the password is valid. |
+| <a name="output_value"></a> [value](#output\_value) | The password value. This is a sensitive value and should be stored securely. |
+<!-- END_TF_DOCS -->

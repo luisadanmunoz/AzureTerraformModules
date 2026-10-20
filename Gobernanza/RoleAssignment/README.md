@@ -162,3 +162,46 @@ module "custom_role" {
 - **Scope resource** must exist before assigning a role to it
 - **Principal** (User, Group, Service Principal) must exist in Azure AD
 - **Role Definition** must exist (built-in roles are always available; custom roles must be created first)
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_role_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the role assignment. | `bool` | `true` | no |
+| <a name="input_resource_group_role_assignments"></a> [resource\_group\_role\_assignments](#input\_resource\_group\_role\_assignments) | (Optional) Map of role assignments scoped to a specific Resource Group. Key is a unique identifier.<br/>- resource\_group\_id: (Required) The Resource Group ID as scope. DEPENDENCY: Resource Group must exist.<br/>- role\_definition\_name: (Optional) Built-in role name. Conflicts with role\_definition\_id.<br/>- role\_definition\_id: (Optional) Scoped role definition ID. Conflicts with role\_definition\_name.<br/>- principal\_id: (Required) The principal ID. DEPENDENCY: Principal must exist.<br/>- principal\_type: (Optional) Type of principal.<br/>- description: (Optional) Description for the assignment.<br/>- skip\_service\_principal\_aad\_check: (Optional) Skip AAD check. Defaults to false. | <pre>map(object({<br/>    resource_group_id                = string<br/>    role_definition_name             = optional(string, null)<br/>    role_definition_id               = optional(string, null)<br/>    principal_id                     = string<br/>    principal_type                   = optional(string, null)<br/>    description                      = optional(string, null)<br/>    skip_service_principal_aad_check = optional(bool, false)<br/>  }))</pre> | `{}` | no |
+| <a name="input_role_assignments"></a> [role\_assignments](#input\_role\_assignments) | (Optional) List of role assignments to create. Each object supports:<br/>- scope: (Required) The scope at which the Role Assignment applies (Management Group, Subscription, Resource Group, or Resource ID). DEPENDENCY: Scope resource must exist.<br/>- role\_definition\_name: (Optional) The name of a built-in Role (e.g., "Contributor", "Reader"). Conflicts with role\_definition\_id.<br/>- role\_definition\_id: (Optional) The Scoped-ID of the Role Definition. Conflicts with role\_definition\_name.<br/>- principal\_id: (Required) The ID of the Principal (User, Group, or Service Principal) to assign the Role Definition to. DEPENDENCY: Principal must exist in Azure AD.<br/>- principal\_type: (Optional) The type of the principal\_id. Possible values: User, Group, ServicePrincipal, ForeignGroup, Device. Setting this avoids a silent API lookup.<br/>- condition: (Optional) The condition that limits the resources that the role can be assigned to.<br/>- condition\_version: (Optional) The version of the condition syntax. Required if condition is set. Values: "1.0", "2.0".<br/>- description: (Optional) The description for this Role Assignment.<br/>- skip\_service\_principal\_aad\_check: (Optional) Skip the Azure AD check for service principals. Defaults to false.<br/>- delegated\_managed\_identity\_resource\_id: (Optional) The delegated Azure Resource ID which contains a Managed Identity.<br/>- name: (Optional) A UUID for the Role Assignment. A new UUID will be generated if not provided. | <pre>list(object({<br/>    scope                                  = string<br/>    role_definition_name                   = optional(string, null)<br/>    role_definition_id                     = optional(string, null)<br/>    principal_id                           = string<br/>    principal_type                         = optional(string, null)<br/>    condition                              = optional(string, null)<br/>    condition_version                      = optional(string, null)<br/>    description                            = optional(string, null)<br/>    skip_service_principal_aad_check       = optional(bool, false)<br/>    delegated_managed_identity_resource_id = optional(string, null)<br/>    name                                   = optional(string, null)<br/>  }))</pre> | `[]` | no |
+| <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | (Optional) The Subscription ID to use as scope. Conflicts with scope in role\_assignments. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_role_assignment_ids"></a> [role\_assignment\_ids](#output\_role\_assignment\_ids) | Map of role assignment keys to their resource IDs. |
+| <a name="output_role_assignment_names"></a> [role\_assignment\_names](#output\_role\_assignment\_names) | Map of role assignment keys to their names (UUIDs). |
+| <a name="output_role_assignment_principal_types"></a> [role\_assignment\_principal\_types](#output\_role\_assignment\_principal\_types) | Map of role assignment keys to the resolved principal type. |
+| <a name="output_role_assignments"></a> [role\_assignments](#output\_role\_assignments) | Full map of all role assignment resources. |
+<!-- END_TF_DOCS -->

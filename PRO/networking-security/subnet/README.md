@@ -72,3 +72,55 @@ module "subnet" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de subredes en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_subnet.subnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
+| [azurerm_subnet_network_security_group_association.subnet_nsg_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
+| [azurerm_subnet_route_table_association.assoc-snet-rt](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_route_table_association) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_actions"></a> [actions](#input\_actions) | Lista los service endpoints de servicio si usa service endpoints en valor true | `list(string)` | `[]` | no |
+| <a name="input_address_prefixes"></a> [address\_prefixes](#input\_address\_prefixes) | n/a | `list(string)` | n/a | yes |
+| <a name="input_default_outbound_access_enabled"></a> [default\_outbound\_access\_enabled](#input\_default\_outbound\_access\_enabled) | n/a | `bool` | n/a | yes |
+| <a name="input_enable_delegation"></a> [enable\_delegation](#input\_enable\_delegation) | ############################################################################ SUBNET DELEGATION VARIABLES ############################################################################ | `bool` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ SUBNET VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_delegation"></a> [name\_delegation](#input\_name\_delegation) | n/a | `string` | n/a | yes |
+| <a name="input_name_service_delegation"></a> [name\_service\_delegation](#input\_name\_service\_delegation) | n/a | `string` | n/a | yes |
+| <a name="input_nsg_assoc"></a> [nsg\_assoc](#input\_nsg\_assoc) | ############################################################################ SUBNET NSG ASSOCIATION ############################################################################ | `bool` | n/a | yes |
+| <a name="input_nsg_id"></a> [nsg\_id](#input\_nsg\_id) | n/a | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_route_table_assoc"></a> [route\_table\_assoc](#input\_route\_table\_assoc) | ############################################################################ SUBNET ROUTE TABLE ASSOCIATION ############################################################################ | `bool` | n/a | yes |
+| <a name="input_route_table_id"></a> [route\_table\_id](#input\_route\_table\_id) | n/a | `string` | n/a | yes |
+| <a name="input_service_endpoints"></a> [service\_endpoints](#input\_service\_endpoints) | Lista los service endpoints de servicio si usa service endpoints en valor true | `list(string)` | `[]` | no |
+| <a name="input_use_actions"></a> [use\_actions](#input\_use\_actions) | Indica si los service endpoints de servicio deben habilitarse. | `bool` | `false` | no |
+| <a name="input_use_service_endpoints"></a> [use\_service\_endpoints](#input\_use\_service\_endpoints) | Indica si los service endpoints de servicio deben habilitarse. | `bool` | `false` | no |
+| <a name="input_virtual_network_name"></a> [virtual\_network\_name](#input\_virtual\_network\_name) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ############################################################################ SUBNET OUTPUT ############################################################################ |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+<!-- END_TF_DOCS -->

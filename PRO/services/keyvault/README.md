@@ -54,3 +54,47 @@ module "keyvault" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de Azure Key Vault con Private Endpoint en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_key_vault.kv](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
+| [azurerm_private_endpoint.private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `map` | `{}` | no |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ KEY VAULT VARIABLES ############################################################################ | `map` | `{}` | no |
+| <a name="input_object_id_01"></a> [object\_id\_01](#input\_object\_id\_01) | n/a | `map` | `{}` | no |
+| <a name="input_private_dns_zone_ids"></a> [private\_dns\_zone\_ids](#input\_private\_dns\_zone\_ids) | n/a | `map` | `{}` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `map` | `{}` | no |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | n/a | `map` | `{}` | no |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | ############################################################################ KEY VAULT - PRIVATE ENDPOINT ############################################################################ | `map` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map` | `{}` | no |
+| <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | n/a | `map` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ############################################################################ KEY VAULT OUTPUTS ############################################################################ |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+<!-- END_TF_DOCS -->

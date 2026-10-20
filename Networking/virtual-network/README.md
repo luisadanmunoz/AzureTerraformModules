@@ -229,3 +229,56 @@ module "subnet_db" {
   service_endpoints    = ["Microsoft.Sql"]
 }
 ```
+
+<!-- BEGIN_TF_DOCS -->
+# Azure Virtual Network Module
+
+Modulo reutilizable para crear Virtual Networks en Azure.
+Soporta DNS personalizado, DDoS protection y peering.
+
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_virtual_network.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_address_space"></a> [address\_space](#input\_address\_space) | Espacio de direcciones CIDR para la VNet | `list(string)` | <pre>[<br/>  "10.0.0.0/16"<br/>]</pre> | no |
+| <a name="input_ddos_protection_plan_id"></a> [ddos\_protection\_plan\_id](#input\_ddos\_protection\_plan\_id) | ID del DDoS Protection Plan (opcional) | `string` | `null` | no |
+| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tags por defecto | `map(string)` | <pre>{<br/>  "ManagedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_dns_servers"></a> [dns\_servers](#input\_dns\_servers) | Lista de servidores DNS personalizados | `list(string)` | `[]` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region de Azure | `string` | n/a | yes |
+| <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id) | ID del Log Analytics Workspace para diagnosticos | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | Nombre de la Virtual Network | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Nombre del Resource Group | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags adicionales | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_address_space"></a> [address\_space](#output\_address\_space) | Espacio de direcciones de la VNet |
+| <a name="output_guid"></a> [guid](#output\_guid) | GUID de la Virtual Network |
+| <a name="output_id"></a> [id](#output\_id) | ID de la Virtual Network |
+| <a name="output_location"></a> [location](#output\_location) | Ubicacion de la VNet |
+| <a name="output_name"></a> [name](#output\_name) | Nombre de la Virtual Network |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Resource Group de la VNet |
+<!-- END_TF_DOCS -->

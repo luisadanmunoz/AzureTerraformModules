@@ -96,3 +96,50 @@ module "app_policy" {
 3. **Use separate policies per identity** - Create individual access policies rather than sharing credentials
 4. **Audit permissions regularly** - Review access policies to remove stale or excessive permissions
 5. **Use application ID for service principals** - Scope policies to specific applications when possible
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_key_vault_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_application_id"></a> [application\_id](#input\_application\_id) | The application ID of the service principal for the access policy. | `string` | `null` | no |
+| <a name="input_certificate_permissions"></a> [certificate\_permissions](#input\_certificate\_permissions) | List of certificate permissions granted to the principal. | `list(string)` | `[]` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_key_permissions"></a> [key\_permissions](#input\_key\_permissions) | List of key permissions granted to the principal. | `list(string)` | `[]` | no |
+| <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | The ID of the Key Vault where the access policy will be applied. | `string` | n/a | yes |
+| <a name="input_object_id"></a> [object\_id](#input\_object\_id) | The object ID of the principal (user, group, or service principal) for the access policy. | `string` | n/a | yes |
+| <a name="input_secret_permissions"></a> [secret\_permissions](#input\_secret\_permissions) | List of secret permissions granted to the principal. | `list(string)` | `[]` | no |
+| <a name="input_storage_permissions"></a> [storage\_permissions](#input\_storage\_permissions) | List of storage permissions granted to the principal. | `list(string)` | `[]` | no |
+| <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | The Azure Active Directory tenant ID for the access policy. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Key Vault Access Policy. |
+| <a name="output_object_id"></a> [object\_id](#output\_object\_id) | The object ID of the principal for the access policy. |
+| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | The tenant ID of the access policy. |
+<!-- END_TF_DOCS -->

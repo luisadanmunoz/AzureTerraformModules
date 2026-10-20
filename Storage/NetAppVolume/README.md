@@ -347,3 +347,66 @@ net use Z: \\<mount_ip>\<volume_path>
 ## License
 
 This module is released under the MIT License.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_netapp_volume.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/netapp_volume) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_account_name"></a> [account\_name](#input\_account\_name) | The name of the NetApp Account where the volume will be created. | `string` | n/a | yes |
+| <a name="input_azure_vmware_data_store_enabled"></a> [azure\_vmware\_data\_store\_enabled](#input\_azure\_vmware\_data\_store\_enabled) | Specifies whether the volume is enabled for Azure VMware Solution datastore purposes. | `bool` | `false` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_data_protection_replication"></a> [data\_protection\_replication](#input\_data\_protection\_replication) | Data protection replication settings for cross-region replication. | <pre>object({<br/>    endpoint_type             = string<br/>    remote_volume_location    = string<br/>    remote_volume_resource_id = string<br/>    replication_frequency     = string<br/>  })</pre> | `null` | no |
+| <a name="input_data_protection_snapshot_policy"></a> [data\_protection\_snapshot\_policy](#input\_data\_protection\_snapshot\_policy) | Data protection snapshot policy settings. | <pre>object({<br/>    snapshot_policy_id = string<br/>  })</pre> | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name (e.g., dev, staging, prod) to include in the generated name. | `string` | `null` | no |
+| <a name="input_export_policy_rules"></a> [export\_policy\_rules](#input\_export\_policy\_rules) | List of export policy rules for the volume. | <pre>list(object({<br/>    rule_index                         = number<br/>    allowed_clients                    = string<br/>    protocols_enabled                  = list(string)<br/>    unix_read_only                     = optional(bool, false)<br/>    unix_read_write                    = optional(bool, true)<br/>    root_access_enabled                = optional(bool, true)<br/>    kerberos_5_read_only_enabled       = optional(bool, false)<br/>    kerberos_5_read_write_enabled      = optional(bool, false)<br/>    kerberos_5i_read_only_enabled      = optional(bool, false)<br/>    kerberos_5i_read_write_enabled     = optional(bool, false)<br/>    kerberos_5p_read_only_enabled      = optional(bool, false)<br/>    kerberos_5p_read_write_enabled     = optional(bool, false)<br/>  }))</pre> | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to include in the generated name. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the NetApp Volume will be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the NetApp Volume. If provided, overrides the generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to use for the generated name if name is not provided. | `string` | `"anfvol"` | no |
+| <a name="input_network_features"></a> [network\_features](#input\_network\_features) | Network features for the volume. Valid values are Basic or Standard. | `string` | `"Basic"` | no |
+| <a name="input_pool_name"></a> [pool\_name](#input\_pool\_name) | The name of the NetApp Pool where the volume will be created. | `string` | n/a | yes |
+| <a name="input_protocols"></a> [protocols](#input\_protocols) | The list of protocols enabled for the volume. Valid values are NFSv3, NFSv4.1, and CIFS. | `list(string)` | <pre>[<br/>  "NFSv3"<br/>]</pre> | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group where the NetApp Volume will be created. | `string` | n/a | yes |
+| <a name="input_security_style"></a> [security\_style](#input\_security\_style) | Volume security style. Valid values are unix or ntfs. | `string` | `"unix"` | no |
+| <a name="input_service_level"></a> [service\_level](#input\_service\_level) | The target performance of the file system. Valid values are Standard, Premium, or Ultra. | `string` | `"Standard"` | no |
+| <a name="input_snapshot_directory_visible"></a> [snapshot\_directory\_visible](#input\_snapshot\_directory\_visible) | Specifies whether the .snapshot directory is visible. | `bool` | `true` | no |
+| <a name="input_storage_quota_in_gb"></a> [storage\_quota\_in\_gb](#input\_storage\_quota\_in\_gb) | The maximum storage quota allowed for a file system in Gigabytes. Minimum is 100 GB. | `number` | n/a | yes |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | The ID of the subnet where the volume will be created. Must be delegated to Microsoft.NetApp/volumes. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to the NetApp Volume. | `map(string)` | `{}` | no |
+| <a name="input_throughput_in_mibps"></a> [throughput\_in\_mibps](#input\_throughput\_in\_mibps) | Throughput of the volume in MiB/s. Required for manual QoS pools. | `number` | `null` | no |
+| <a name="input_volume_path"></a> [volume\_path](#input\_volume\_path) | A unique file path for the volume. Used when creating mount targets. | `string` | n/a | yes |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to include in the generated name. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the NetApp Volume. |
+| <a name="output_mount_ip_addresses"></a> [mount\_ip\_addresses](#output\_mount\_ip\_addresses) | The list of IPv4 addresses for mounting the volume. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the NetApp Volume. |
+| <a name="output_volume_path"></a> [volume\_path](#output\_volume\_path) | The unique file path of the volume. |
+<!-- END_TF_DOCS -->

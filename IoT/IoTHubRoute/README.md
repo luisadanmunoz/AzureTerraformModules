@@ -115,3 +115,53 @@ module "iot_hub_route_twin" {
 | condition | The condition of the Route |
 | endpoint_names | The endpoint names of the Route |
 | enabled | Whether the Route is enabled |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_iothub_route.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub_route) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_condition"></a> [condition](#input\_condition) | The condition evaluated to apply the route. Defaults to true. | `string` | `"true"` | no |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the route resource. | `bool` | `true` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | Whether the route is enabled. | `bool` | `true` | no |
+| <a name="input_endpoint_names"></a> [endpoint\_names](#input\_endpoint\_names) | The list of endpoint names for the route. | `list(string)` | n/a | yes |
+| <a name="input_iothub_name"></a> [iothub\_name](#input\_iothub\_name) | The name of the IoT Hub. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the route. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group. | `string` | n/a | yes |
+| <a name="input_source_type"></a> [source\_type](#input\_source\_type) | The source for the route. Possible values are DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags (not applied to resource, kept for consistency). | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_condition"></a> [condition](#output\_condition) | The condition of the IoT Hub Route. |
+| <a name="output_enabled"></a> [enabled](#output\_enabled) | Whether the IoT Hub Route is enabled. |
+| <a name="output_endpoint_names"></a> [endpoint\_names](#output\_endpoint\_names) | The endpoint names of the IoT Hub Route. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the IoT Hub Route. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the IoT Hub Route. |
+| <a name="output_source"></a> [source](#output\_source) | The source of the IoT Hub Route. |
+<!-- END_TF_DOCS -->

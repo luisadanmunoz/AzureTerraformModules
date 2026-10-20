@@ -63,3 +63,49 @@ module "iothub" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de Azure IoT Hub con Private Endpoint y Device Update en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_iothub.iothub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub) | resource |
+| [azurerm_iothub_device_update_account.device_update_account](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub_device_update_account) | resource |
+| [azurerm_iothub_device_update_instance.device_update_instance](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub_device_update_instance) | resource |
+| [azurerm_private_endpoint.private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+| [azurerm_private_endpoint.private_endpoint_Device_update](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_connection_string"></a> [connection\_string](#input\_connection\_string) | n/a | `map` | `{}` | no |
+| <a name="input_connection_string_diag"></a> [connection\_string\_diag](#input\_connection\_string\_diag) | n/a | `map` | `{}` | no |
+| <a name="input_connection_string_sta"></a> [connection\_string\_sta](#input\_connection\_string\_sta) | n/a | `map` | `{}` | no |
+| <a name="input_container_name"></a> [container\_name](#input\_container\_name) | n/a | `map` | `{}` | no |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `map` | `{}` | no |
+| <a name="input_name"></a> [name](#input\_name) | n/a | `map` | `{}` | no |
+| <a name="input_private_dns_zone_ids"></a> [private\_dns\_zone\_ids](#input\_private\_dns\_zone\_ids) | n/a | `map` | `{}` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `map` | `{}` | no |
+| <a name="input_sta_id"></a> [sta\_id](#input\_sta\_id) | n/a | `map` | `{}` | no |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | n/a | `map` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | `{}` | no |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

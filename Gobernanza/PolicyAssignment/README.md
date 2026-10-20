@@ -127,3 +127,65 @@ module "policy_assignment_mg" {
 3. **Include non-compliance messages** - Help users understand why resources are blocked
 4. **Use SystemAssigned identity** - For DeployIfNotExists and Modify policies
 5. **Test with Audit first** - Validate impact before enforcing with Deny
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_assignment) | resource |
+| [azurerm_resource_group_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group_policy_assignment) | resource |
+| [azurerm_resource_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_policy_assignment) | resource |
+| [azurerm_subscription_policy_assignment.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription_policy_assignment) | resource |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy assignment. | `string` | `null` | no |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name of the policy assignment. | `string` | `null` | no |
+| <a name="input_enforce"></a> [enforce](#input\_enforce) | Whether the policy assignment is enforced. | `bool` | `true` | no |
+| <a name="input_identity"></a> [identity](#input\_identity) | Managed identity configuration for remediation tasks. | <pre>object({<br/>    type         = string<br/>    identity_ids = optional(list(string), [])<br/>  })</pre> | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The location of the policy assignment (required when identity is specified). | `string` | `null` | no |
+| <a name="input_management_group_id"></a> [management\_group\_id](#input\_management\_group\_id) | The ID of the Management Group for the assignment (when scope\_type is management\_group). | `string` | `null` | no |
+| <a name="input_metadata"></a> [metadata](#input\_metadata) | Metadata for the policy assignment in JSON format. | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy assignment. | `string` | n/a | yes |
+| <a name="input_non_compliance_messages"></a> [non\_compliance\_messages](#input\_non\_compliance\_messages) | List of non-compliance messages for the policy assignment. | <pre>list(object({<br/>    content                        = string<br/>    policy_definition_reference_id = optional(string)<br/>  }))</pre> | `[]` | no |
+| <a name="input_not_scopes"></a> [not\_scopes](#input\_not\_scopes) | List of resource IDs to exclude from the policy assignment. | `list(string)` | `[]` | no |
+| <a name="input_overrides"></a> [overrides](#input\_overrides) | Policy property value overrides. | <pre>list(object({<br/>    value = string<br/>    selectors = list(object({<br/>      kind   = string<br/>      in     = optional(list(string))<br/>      not_in = optional(list(string))<br/>    }))<br/>  }))</pre> | `[]` | no |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | Parameters for the policy assignment in JSON format. | `string` | `null` | no |
+| <a name="input_policy_definition_id"></a> [policy\_definition\_id](#input\_policy\_definition\_id) | The ID of the Policy Definition to assign. | `string` | n/a | yes |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The ID of the Resource Group for the assignment (when scope\_type is resource\_group). | `string` | `null` | no |
+| <a name="input_resource_id"></a> [resource\_id](#input\_resource\_id) | The ID of the Resource for the assignment (when scope\_type is resource). | `string` | `null` | no |
+| <a name="input_resource_selectors"></a> [resource\_selectors](#input\_resource\_selectors) | Resource selectors to filter resources for the policy assignment. | <pre>list(object({<br/>    name = string<br/>    selectors = list(object({<br/>      kind   = string<br/>      in     = optional(list(string))<br/>      not_in = optional(list(string))<br/>    }))<br/>  }))</pre> | `[]` | no |
+| <a name="input_scope_type"></a> [scope\_type](#input\_scope\_type) | The type of scope for the assignment: subscription, resource\_group, management\_group, or resource. | `string` | `"subscription"` | no |
+| <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | The ID of the Subscription for the assignment (when scope\_type is subscription). If null, uses current subscription. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Policy Assignment. |
+| <a name="output_identity"></a> [identity](#output\_identity) | The identity of the Policy Assignment. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Policy Assignment. |
+| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | The Principal ID of the Policy Assignment's managed identity. |
+<!-- END_TF_DOCS -->

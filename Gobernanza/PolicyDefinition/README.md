@@ -153,3 +153,53 @@ module "policy_enterprise" {
 | DeployIfNotExists | Deploy resources if missing |
 | AuditIfNotExists | Audit if related resource missing |
 | Disabled | Policy is disabled |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group_policy_definition.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group_policy_definition) | resource |
+| [azurerm_policy_definition.subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/policy_definition) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy definition. | `string` | `null` | no |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name of the policy definition. | `string` | n/a | yes |
+| <a name="input_management_group_id"></a> [management\_group\_id](#input\_management\_group\_id) | The ID of the Management Group where this policy should be defined. If null, will be defined at subscription level. | `string` | `null` | no |
+| <a name="input_metadata"></a> [metadata](#input\_metadata) | The metadata JSON string for the policy definition. | `string` | `null` | no |
+| <a name="input_mode"></a> [mode](#input\_mode) | The policy mode. Possible values are All, Indexed, Microsoft.ContainerService.Data, etc. | `string` | `"All"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy definition. | `string` | n/a | yes |
+| <a name="input_parameters"></a> [parameters](#input\_parameters) | The parameters JSON string for the policy definition. | `string` | `null` | no |
+| <a name="input_policy_rule"></a> [policy\_rule](#input\_policy\_rule) | The policy rule JSON string. | `string` | `null` | no |
+| <a name="input_policy_rule_file"></a> [policy\_rule\_file](#input\_policy\_rule\_file) | Path to a file containing the policy rule JSON. | `string` | `null` | no |
+| <a name="input_policy_type"></a> [policy\_type](#input\_policy\_type) | The policy type. Possible values are BuiltIn, Custom, NotSpecified, Static. | `string` | `"Custom"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Policy Definition. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Policy Definition. |
+| <a name="output_role_definition_ids"></a> [role\_definition\_ids](#output\_role\_definition\_ids) | The role definition IDs required for remediation (for DeployIfNotExists/Modify effects). |
+<!-- END_TF_DOCS -->

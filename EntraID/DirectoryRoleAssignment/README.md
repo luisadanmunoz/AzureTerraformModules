@@ -46,3 +46,44 @@ module "role_assignment" {
 | Name | Description |
 |------|-------------|
 | id | The Terraform resource ID |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | >= 2.45.0, < 3.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azuread_directory_role_assignment.this](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/directory_role_assignment) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_app_scope_id"></a> [app\_scope\_id](#input\_app\_scope\_id) | The app scope ID for scoped role assignments (e.g., for application-scoped roles). | `string` | `null` | no |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the role assignment. | `bool` | `true` | no |
+| <a name="input_directory_scope_id"></a> [directory\_scope\_id](#input\_directory\_scope\_id) | The directory scope ID for scoped role assignments (e.g., administrative unit ID). | `string` | `null` | no |
+| <a name="input_principal_object_id"></a> [principal\_object\_id](#input\_principal\_object\_id) | The object ID of the principal (user, group, or service principal) to assign the role to. | `string` | n/a | yes |
+| <a name="input_role_id"></a> [role\_id](#input\_role\_id) | The object ID of the directory role to assign. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The Terraform resource ID of the role assignment. |
+<!-- END_TF_DOCS -->

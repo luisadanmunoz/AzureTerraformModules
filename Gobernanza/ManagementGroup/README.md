@@ -101,3 +101,46 @@ Tenant Root Group
     ├── Sandbox (mg-sandbox)
     └── Decommissioned (mg-decommissioned)
 ```
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name of the management group. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the management group. | `string` | n/a | yes |
+| <a name="input_parent_management_group_id"></a> [parent\_management\_group\_id](#input\_parent\_management\_group\_id) | The ID of the parent Management Group. If null, will be created under the tenant root group. | `string` | `null` | no |
+| <a name="input_subscription_ids"></a> [subscription\_ids](#input\_subscription\_ids) | List of subscription IDs to associate with this management group. | `list(string)` | `[]` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Management Group. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Management Group. |
+| <a name="output_tenant_scoped_id"></a> [tenant\_scoped\_id](#output\_tenant\_scoped\_id) | The tenant-scoped ID of the Management Group. |
+<!-- END_TF_DOCS -->

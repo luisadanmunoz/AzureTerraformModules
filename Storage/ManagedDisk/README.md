@@ -376,3 +376,78 @@ module "generated_name_disk" {
 ## License
 
 This module is licensed under the MIT License.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_managed_disk.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/managed_disk) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the Managed Disk resource. | `bool` | `true` | no |
+| <a name="input_create_option"></a> [create\_option](#input\_create\_option) | The method to use when creating the Managed Disk. | `string` | `"Empty"` | no |
+| <a name="input_disk_access_id"></a> [disk\_access\_id](#input\_disk\_access\_id) | The ID of the disk access resource for using private endpoints on disks. Required when network\_access\_policy is AllowPrivate. | `string` | `null` | no |
+| <a name="input_disk_encryption_set_id"></a> [disk\_encryption\_set\_id](#input\_disk\_encryption\_set\_id) | The ID of the Disk Encryption Set which should be used to encrypt this Managed Disk. | `string` | `null` | no |
+| <a name="input_disk_iops_read_only"></a> [disk\_iops\_read\_only](#input\_disk\_iops\_read\_only) | The number of IOPS allowed across all VMs mounting the shared disk as read-only. | `number` | `null` | no |
+| <a name="input_disk_iops_read_write"></a> [disk\_iops\_read\_write](#input\_disk\_iops\_read\_write) | The number of IOPS allowed for this disk. Only settable for UltraSSD\_LRS and PremiumV2\_LRS disks. | `number` | `null` | no |
+| <a name="input_disk_mbps_read_only"></a> [disk\_mbps\_read\_only](#input\_disk\_mbps\_read\_only) | The bandwidth allowed across all VMs mounting the shared disk as read-only in MB per second. | `number` | `null` | no |
+| <a name="input_disk_mbps_read_write"></a> [disk\_mbps\_read\_write](#input\_disk\_mbps\_read\_write) | The bandwidth allowed for this disk in MB per second. Only settable for UltraSSD\_LRS and PremiumV2\_LRS disks. | `number` | `null` | no |
+| <a name="input_disk_size_gb"></a> [disk\_size\_gb](#input\_disk\_size\_gb) | The size of the Managed Disk in gigabytes. | `number` | n/a | yes |
+| <a name="input_encryption_settings"></a> [encryption\_settings](#input\_encryption\_settings) | Encryption settings for the Managed Disk. Structure:<br/>{<br/>  disk\_encryption\_key = {<br/>    secret\_url      = string<br/>    source\_vault\_id = string<br/>  }<br/>  key\_encryption\_key = {<br/>    key\_url         = string<br/>    source\_vault\_id = string<br/>  }<br/>} | <pre>object({<br/>    disk_encryption_key = optional(object({<br/>      secret_url      = string<br/>      source_vault_id = string<br/>    }))<br/>    key_encryption_key = optional(object({<br/>      key_url         = string<br/>      source_vault_id = string<br/>    }))<br/>  })</pre> | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to include in the generated name (e.g., dev, staging, prod). | `string` | `null` | no |
+| <a name="input_gallery_image_reference_id"></a> [gallery\_image\_reference\_id](#input\_gallery\_image\_reference\_id) | The ID of a Gallery Image Version to use when create\_option is FromImage. | `string` | `null` | no |
+| <a name="input_hyper_v_generation"></a> [hyper\_v\_generation](#input\_hyper\_v\_generation) | The Hyper-V Generation of the Disk when the source of an Import or Copy operation targets a source that contains an operating system. | `string` | `null` | no |
+| <a name="input_image_reference_id"></a> [image\_reference\_id](#input\_image\_reference\_id) | The ID of an existing Platform Image to use when create\_option is FromImage. | `string` | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to include in the generated name. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the Managed Disk will be created. | `string` | n/a | yes |
+| <a name="input_logical_sector_size"></a> [logical\_sector\_size](#input\_logical\_sector\_size) | The logical sector size in bytes for Ultra disks. Possible values are 512 or 4096. | `number` | `null` | no |
+| <a name="input_max_shares"></a> [max\_shares](#input\_max\_shares) | The maximum number of VMs that can attach to the disk at the same time. Value greater than 1 indicates a shared disk. | `number` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | The explicit name for the Managed Disk. If provided, this takes precedence over generated names. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The prefix to use for the generated Managed Disk name. | `string` | `"disk"` | no |
+| <a name="input_network_access_policy"></a> [network\_access\_policy](#input\_network\_access\_policy) | The policy for accessing the disk via network. | `string` | `"AllowAll"` | no |
+| <a name="input_on_demand_bursting_enabled"></a> [on\_demand\_bursting\_enabled](#input\_on\_demand\_bursting\_enabled) | Specifies if On-Demand Bursting is enabled for the Managed Disk. Only applicable to Premium\_LRS, Premium\_ZRS, PremiumV2\_LRS, and UltraSSD\_LRS. | `bool` | `false` | no |
+| <a name="input_os_type"></a> [os\_type](#input\_os\_type) | Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. | `string` | `null` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Whether it is allowed to access the disk via public network. | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the Resource Group where the Managed Disk will be created. | `string` | n/a | yes |
+| <a name="input_secure_vm_disk_encryption_set_id"></a> [secure\_vm\_disk\_encryption\_set\_id](#input\_secure\_vm\_disk\_encryption\_set\_id) | The ID of the Disk Encryption Set which should be used to encrypt this disk when the disk is used with a Confidential VM. | `string` | `null` | no |
+| <a name="input_security_type"></a> [security\_type](#input\_security\_type) | The security type of the Managed Disk when used with Confidential VMs. | `string` | `null` | no |
+| <a name="input_source_resource_id"></a> [source\_resource\_id](#input\_source\_resource\_id) | The ID of an existing Managed Disk or Snapshot to copy when create\_option is Copy or Restore. | `string` | `null` | no |
+| <a name="input_source_uri"></a> [source\_uri](#input\_source\_uri) | The URI to a valid VHD file to be used when create\_option is Import or ImportSecure. | `string` | `null` | no |
+| <a name="input_storage_account_id"></a> [storage\_account\_id](#input\_storage\_account\_id) | The ID of the Storage Account where the source\_uri is located. Required when create\_option is Import or ImportSecure. | `string` | `null` | no |
+| <a name="input_storage_account_type"></a> [storage\_account\_type](#input\_storage\_account\_type) | The type of storage to use for the Managed Disk. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to the Managed Disk resource. | `map(string)` | `{}` | no |
+| <a name="input_tier"></a> [tier](#input\_tier) | The disk performance tier to use. Only applicable to disks of type Premium\_LRS. | `string` | `null` | no |
+| <a name="input_trusted_launch_enabled"></a> [trusted\_launch\_enabled](#input\_trusted\_launch\_enabled) | Specifies if Trusted Launch is enabled for the Managed Disk. | `bool` | `false` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to include in the generated name. | `string` | `null` | no |
+| <a name="input_zone"></a> [zone](#input\_zone) | The Availability Zone in which the Managed Disk should be located. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_disk_size_gb"></a> [disk\_size\_gb](#output\_disk\_size\_gb) | The size of the Managed Disk in gigabytes. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Managed Disk. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Managed Disk. |
+| <a name="output_storage_account_type"></a> [storage\_account\_type](#output\_storage\_account\_type) | The storage account type of the Managed Disk. |
+<!-- END_TF_DOCS -->

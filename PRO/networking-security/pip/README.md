@@ -61,3 +61,48 @@ module "public_ip" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de direcciones IP públicas en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_diagnostic_setting.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_public_ip.public_ip](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
+| [azurerm_monitor_diagnostic_categories.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_allocation_method"></a> [allocation\_method](#input\_allocation\_method) | n/a | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ PUBLIC IP VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_diagnostic_setting"></a> [name\_diagnostic\_setting](#input\_name\_diagnostic\_setting) | ############################################################################ PUBLIC IP VARIABLES DIAGNOSTIC SETTING ############################################################################ | `map` | `{}` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_sku"></a> [sku](#input\_sku) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | `{}` | no |
+| <a name="input_workspace_resource_id"></a> [workspace\_resource\_id](#input\_workspace\_resource\_id) | n/a | `map` | `{}` | no |
+| <a name="input_zones"></a> [zones](#input\_zones) | n/a | `map` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ############################################################################# PUBLIC IP OUTPUTS ############################################################################# |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+<!-- END_TF_DOCS -->

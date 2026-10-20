@@ -118,3 +118,53 @@ module "iot_hub_sap_full" {
 | secondary_key | The secondary key | yes |
 | primary_connection_string | The primary connection string | yes |
 | secondary_connection_string | The secondary connection string | yes |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_iothub_shared_access_policy.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub_shared_access_policy) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the shared access policy resource. | `bool` | `true` | no |
+| <a name="input_device_connect"></a> [device\_connect](#input\_device\_connect) | Whether to grant device connect permission. | `bool` | `false` | no |
+| <a name="input_iothub_name"></a> [iothub\_name](#input\_iothub\_name) | The name of the IoT Hub. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the shared access policy. | `string` | n/a | yes |
+| <a name="input_registry_read"></a> [registry\_read](#input\_registry\_read) | Whether to grant registry read permission. | `bool` | `false` | no |
+| <a name="input_registry_write"></a> [registry\_write](#input\_registry\_write) | Whether to grant registry write permission. Implies registry\_read. | `bool` | `false` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group. | `string` | n/a | yes |
+| <a name="input_service_connect"></a> [service\_connect](#input\_service\_connect) | Whether to grant service connect permission. | `bool` | `false` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags (not applied to resource, kept for consistency). | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the IoT Hub Shared Access Policy. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the IoT Hub Shared Access Policy. |
+| <a name="output_primary_connection_string"></a> [primary\_connection\_string](#output\_primary\_connection\_string) | The primary connection string of the Shared Access Policy. |
+| <a name="output_primary_key"></a> [primary\_key](#output\_primary\_key) | The primary key of the Shared Access Policy. |
+| <a name="output_secondary_connection_string"></a> [secondary\_connection\_string](#output\_secondary\_connection\_string) | The secondary connection string of the Shared Access Policy. |
+| <a name="output_secondary_key"></a> [secondary\_key](#output\_secondary\_key) | The secondary key of the Shared Access Policy. |
+<!-- END_TF_DOCS -->

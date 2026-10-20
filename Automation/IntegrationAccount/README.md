@@ -130,3 +130,52 @@ After creating an Integration Account, you can add B2B components:
 - **Batch Configurations** - Batch processing rules
 
 These are typically managed via separate Terraform resources or the Azure Portal.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_logic_app_integration_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/logic_app_integration_account) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Integration Account. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Environment name (e.g., dev, staging, prod). | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number for the naming convention. | `string` | `"001"` | no |
+| <a name="input_integration_service_environment_id"></a> [integration\_service\_environment\_id](#input\_integration\_service\_environment\_id) | (Optional) The ID of the Integration Service Environment. DEPENDENCY: ISE must exist. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure Region where the Integration Account should exist. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The name of the Integration Account. If not provided, a name will be generated. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix for the generated name. Default: 'intacc'. | `string` | `"intacc"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | (Optional) The SKU of the Integration Account. Possible values: Free, Basic, Standard. Default: Basic. | `string` | `"Basic"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) Workload name for the naming convention. | `string` | `"b2b"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Integration Account. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Integration Account. |
+| <a name="output_sku_name"></a> [sku\_name](#output\_sku\_name) | The SKU of the Integration Account. |
+<!-- END_TF_DOCS -->

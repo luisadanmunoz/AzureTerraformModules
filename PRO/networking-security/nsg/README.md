@@ -50,3 +50,40 @@ module "nsg" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de Network Security Groups en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_network_security_group.nsg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ NETWORK SECURITY GROUP VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_nsg_id"></a> [nsg\_id](#output\_nsg\_id) | ############################################################################ NETWORK SECURITY GROUP OUTPUT ############################################################################ |
+| <a name="output_nsg_name"></a> [nsg\_name](#output\_nsg\_name) | n/a |
+<!-- END_TF_DOCS -->

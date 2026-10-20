@@ -64,3 +64,51 @@ module "vnet_peering" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de peering entre redes virtuales en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+| <a name="provider_azurerm.hub"></a> [azurerm.hub](#provider\_azurerm.hub) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_virtual_network_peering.peering_01](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
+| [azurerm_virtual_network_peering.peering_02](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
+| [azurerm_virtual_network.vnet_hub](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/virtual_network) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_allow_forwarded_traffic_01"></a> [allow\_forwarded\_traffic\_01](#input\_allow\_forwarded\_traffic\_01) | n/a | `bool` | n/a | yes |
+| <a name="input_allow_forwarded_traffic_02"></a> [allow\_forwarded\_traffic\_02](#input\_allow\_forwarded\_traffic\_02) | n/a | `bool` | n/a | yes |
+| <a name="input_allow_gateway_transit_01"></a> [allow\_gateway\_transit\_01](#input\_allow\_gateway\_transit\_01) | n/a | `bool` | n/a | yes |
+| <a name="input_allow_gateway_transit_02"></a> [allow\_gateway\_transit\_02](#input\_allow\_gateway\_transit\_02) | n/a | `bool` | n/a | yes |
+| <a name="input_allow_virtual_network_access_01"></a> [allow\_virtual\_network\_access\_01](#input\_allow\_virtual\_network\_access\_01) | n/a | `bool` | n/a | yes |
+| <a name="input_allow_virtual_network_access_02"></a> [allow\_virtual\_network\_access\_02](#input\_allow\_virtual\_network\_access\_02) | n/a | `bool` | n/a | yes |
+| <a name="input_name_vnet_01"></a> [name\_vnet\_01](#input\_name\_vnet\_01) | n/a | `string` | n/a | yes |
+| <a name="input_name_vnet_02"></a> [name\_vnet\_02](#input\_name\_vnet\_02) | ############################################################################# # VIRTUAL NETWORK SUBSCRIPTION HUB - REMOTA ############################################################################# | `string` | n/a | yes |
+| <a name="input_peering_name_vnet_01"></a> [peering\_name\_vnet\_01](#input\_peering\_name\_vnet\_01) | ############################################################################# # PEERING FROM - SPOKE TO HUB ############################################################################# | `string` | n/a | yes |
+| <a name="input_peering_name_vnet_02"></a> [peering\_name\_vnet\_02](#input\_peering\_name\_vnet\_02) | ############################################################################# # PEERING - HUB TO SPOKE ############################################################################# | `string` | n/a | yes |
+| <a name="input_resource_group_vnet_01"></a> [resource\_group\_vnet\_01](#input\_resource\_group\_vnet\_01) | n/a | `string` | n/a | yes |
+| <a name="input_resource_group_vnet_02"></a> [resource\_group\_vnet\_02](#input\_resource\_group\_vnet\_02) | n/a | `string` | n/a | yes |
+| <a name="input_use_remote_gateways_01"></a> [use\_remote\_gateways\_01](#input\_use\_remote\_gateways\_01) | n/a | `bool` | n/a | yes |
+| <a name="input_use_remote_gateways_02"></a> [use\_remote\_gateways\_02](#input\_use\_remote\_gateways\_02) | n/a | `bool` | n/a | yes |
+| <a name="input_vnet_id_01"></a> [vnet\_id\_01](#input\_vnet\_id\_01) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

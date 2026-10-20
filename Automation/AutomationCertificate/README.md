@@ -166,3 +166,46 @@ cert = crypto.load_pkcs12(cert_data, password)
 - Consider storing certificates in Key Vault and referencing them
 - Monitor certificate expiry dates and renew before expiration
 - Private keys are stored encrypted in Azure Automation
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_automation_certificate.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_certificate) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | (Required) The name of the Automation Account where the Certificates will be stored. DEPENDENCY: Automation Account must exist. | `string` | n/a | yes |
+| <a name="input_certificates"></a> [certificates](#input\_certificates) | (Optional) Map of certificates to create. The key is the certificate name.<br/>- base64: (Required) The base64-encoded content of the PFX certificate.<br/>- password: (Optional) The password for the PFX certificate. Sensitive.<br/>- description: (Optional) Description of the certificate.<br/>- exportable: (Optional) Whether the certificate is exportable. Default: true. | <pre>map(object({<br/>    base64      = string<br/>    password    = optional(string, null)<br/>    description = optional(string, null)<br/>    exportable  = optional(bool, true)<br/>  }))</pre> | `{}` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Automation Certificates. | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Automation Account exists. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_certificate_expiry_dates"></a> [certificate\_expiry\_dates](#output\_certificate\_expiry\_dates) | Map of certificate names to their expiry dates. |
+| <a name="output_certificate_ids"></a> [certificate\_ids](#output\_certificate\_ids) | Map of certificate names to their IDs. |
+| <a name="output_certificate_names"></a> [certificate\_names](#output\_certificate\_names) | List of created certificate names. |
+| <a name="output_certificate_thumbprints"></a> [certificate\_thumbprints](#output\_certificate\_thumbprints) | Map of certificate names to their thumbprints. |
+<!-- END_TF_DOCS -->

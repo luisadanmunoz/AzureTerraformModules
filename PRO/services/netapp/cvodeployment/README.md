@@ -113,3 +113,42 @@ El módulo incluye una configuración alternativa comentada que muestra:
 - **Cloud Manager Connector** desplegado
 - **Permisos Azure**: Contributor en el Resource Group
 - **Token NetApp**: Válido y con permisos apropiados
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | =2.46.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | =2.46.0 |
+| <a name="provider_netapp-cloudmanager"></a> [netapp-cloudmanager](#provider\_netapp-cloudmanager) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [netapp-cloudmanager_cvo_azure.cl-azure](https://registry.terraform.io/providers/NetApp/netapp-cloudmanager/latest/docs/resources/cvo_azure) | resource |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.46.0/docs/data-sources/subscription) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_token"></a> [token](#input\_token) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_current_subscription_display_id"></a> [current\_subscription\_display\_id](#output\_current\_subscription\_display\_id) | n/a |
+| <a name="output_current_subscription_display_name"></a> [current\_subscription\_display\_name](#output\_current\_subscription\_display\_name) | n/a |
+<!-- END_TF_DOCS -->

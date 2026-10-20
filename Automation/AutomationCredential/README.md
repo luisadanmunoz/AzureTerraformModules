@@ -152,3 +152,44 @@ password = credential["password"]
 - Use Managed Identities when possible instead of credentials
 - Consider using Key Vault references for password management
 - The `credentials` variable is marked as sensitive in Terraform
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_automation_credential.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_credential) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | (Required) The name of the Automation Account where the Credentials will be created. DEPENDENCY: Automation Account must exist. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Automation Credentials. | `bool` | `true` | no |
+| <a name="input_credentials"></a> [credentials](#input\_credentials) | (Optional) Map of credentials to create. The key is the credential name.<br/>- username: (Required) The username for the credential.<br/>- password: (Required) The password for the credential. Sensitive value.<br/>- description: (Optional) Description of the credential. | <pre>map(object({<br/>    username    = string<br/>    password    = string<br/>    description = optional(string, null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Automation Account exists. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_credential_ids"></a> [credential\_ids](#output\_credential\_ids) | Map of credential names to their IDs. |
+| <a name="output_credential_names"></a> [credential\_names](#output\_credential\_names) | List of created credential names. |
+<!-- END_TF_DOCS -->

@@ -234,3 +234,66 @@ module "vnm" {
 - Connectivity and Security Admin configurations must be deployed separately after creation using deployment resources
 - Network Group membership can be defined statically (via static_members) or dynamically using Azure Policy (outside this module)
 - The `scope_accesses` determine which configuration types can be created - include both if you need Connectivity and SecurityAdmin
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_network_manager.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager) | resource |
+| [azurerm_network_manager_admin_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_admin_rule) | resource |
+| [azurerm_network_manager_admin_rule_collection.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_admin_rule_collection) | resource |
+| [azurerm_network_manager_connectivity_configuration.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_connectivity_configuration) | resource |
+| [azurerm_network_manager_network_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_network_group) | resource |
+| [azurerm_network_manager_security_admin_configuration.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_security_admin_configuration) | resource |
+| [azurerm_network_manager_static_member.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_manager_static_member) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_connectivity_configurations"></a> [connectivity\_configurations](#input\_connectivity\_configurations) | (Optional) A list of Connectivity Configurations for the Virtual Network Manager.<br/><br/>Attributes:<br/>  - name:                          (Required) The name of the connectivity configuration.<br/>  - network\_group\_id:              (Required) The ID of the Network Group to associate.<br/>  - connectivity\_topology:         (Required) The connectivity topology type. Possible values: "HubAndSpoke", "Mesh".<br/>  - applies\_to\_group:              (Required) A list of groups the configuration applies to.<br/>    - group\_connectivity:  (Required) The group connectivity type. Possible values: "None", "DirectlyConnected".<br/>    - network\_group\_id:    (Required) The ID of the Network Group.<br/>    - use\_hub\_gateway:     (Optional) Whether to use the hub's gateway. Defaults to false.<br/>    - global\_mesh\_enabled: (Optional) Whether global mesh is enabled. Defaults to false.<br/>  - hub:                           (Optional) Hub configuration for HubAndSpoke topology.<br/>    - resource\_id:   (Required) The resource ID of the hub Virtual Network.<br/>    - resource\_type:  (Optional) The resource type. Defaults to "Microsoft.Network/virtualNetworks".<br/>  - delete\_existing\_peering\_enabled: (Optional) Whether to delete existing peerings. Defaults to false.<br/>  - global\_mesh\_enabled:           (Optional) Whether global mesh is enabled at the configuration level. Defaults to false.<br/>  - description:                   (Optional) A description of the connectivity configuration. | <pre>list(object({<br/>    name                  = string<br/>    network_group_id      = optional(string, null)<br/>    connectivity_topology = string<br/>    applies_to_group = list(object({<br/>      group_connectivity  = string<br/>      network_group_id    = string<br/>      use_hub_gateway     = optional(bool, false)<br/>      global_mesh_enabled = optional(bool, false)<br/>    }))<br/>    hub = optional(object({<br/>      resource_id   = string<br/>      resource_type = optional(string, "Microsoft.Network/virtualNetworks")<br/>    }), null)<br/>    delete_existing_peering_enabled = optional(bool, false)<br/>    global_mesh_enabled             = optional(bool, false)<br/>    description                     = optional(string, null)<br/>  }))</pre> | `[]` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Virtual Network Manager. Set to false to disable resource creation without removing module code. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | (Optional) A description of the Virtual Network Manager. | `string` | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) The environment name (e.g., dev, staging, prod), used for naming convention. | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number or identifier for naming convention. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the Virtual Network Manager will be deployed.<br/>DEPENDENCY: Should match the Resource Group location for optimal performance. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the Virtual Network Manager. If provided, overrides the generated name from name\_prefix/workload/environment/instance. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix to prepend to the generated Virtual Network Manager name. Used when 'name' is not provided. | `string` | `"vnm"` | no |
+| <a name="input_network_groups"></a> [network\_groups](#input\_network\_groups) | (Optional) A list of Network Groups to create within the Virtual Network Manager.<br/><br/>Attributes:<br/>  - name:           (Required) The name of the Network Group.<br/>  - description:    (Optional) A description of the Network Group.<br/>  - static\_members: (Optional) A list of objects defining static VNet members.<br/>    - name:                  (Required) The name of the static member entry.<br/>    - target\_virtual\_network\_id: (Required) The resource ID of the VNet to add. | <pre>list(object({<br/>    name        = string<br/>    description = optional(string, null)<br/>    static_members = optional(list(object({<br/>      name                      = string<br/>      target_virtual_network_id = string<br/>    })), [])<br/>  }))</pre> | `[]` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Virtual Network Manager will be created.<br/>DEPENDENCY: Resource Group must exist before creating the Virtual Network Manager. | `string` | n/a | yes |
+| <a name="input_scope"></a> [scope](#input\_scope) | (Required) The scope of the Virtual Network Manager. At least one of management\_group\_ids or subscription\_ids must be provided.<br/><br/>Attributes:<br/>  - management\_group\_ids: (Optional) List of Management Group IDs to include in scope.<br/>  - subscription\_ids:     (Optional) List of Subscription IDs to include in scope. | <pre>object({<br/>    management_group_ids = optional(list(string), [])<br/>    subscription_ids     = optional(list(string), [])<br/>  })</pre> | n/a | yes |
+| <a name="input_scope_accesses"></a> [scope\_accesses](#input\_scope\_accesses) | (Required) A list of configuration deployment types permitted by this Network Manager.<br/>Possible values: "Connectivity", "SecurityAdmin". | `list(string)` | n/a | yes |
+| <a name="input_security_admin_configurations"></a> [security\_admin\_configurations](#input\_security\_admin\_configurations) | (Optional) A list of Security Admin Configurations for the Virtual Network Manager.<br/><br/>Attributes:<br/>  - name:        (Required) The name of the security admin configuration.<br/>  - description: (Optional) A description of the security admin configuration.<br/>  - rule\_collections: (Optional) A list of rule collections within this configuration.<br/>    - name:             (Required) The name of the rule collection.<br/>    - description:      (Optional) A description of the rule collection.<br/>    - network\_group\_ids: (Required) A list of Network Group IDs the rules apply to.<br/>    - rules:            (Optional) A list of admin rules within this collection.<br/>      - name:                    (Required) The name of the rule.<br/>      - description:             (Optional) A description of the rule.<br/>      - action:                  (Required) The action. Possible values: "Allow", "Deny", "AlwaysAllow".<br/>      - direction:               (Required) The direction. Possible values: "Inbound", "Outbound".<br/>      - priority:                (Required) The priority (1-4096).<br/>      - protocol:                (Required) The protocol. Possible values: "Tcp", "Udp", "Icmp", "Esp", "Any", "Ah".<br/>      - source\_port\_ranges:      (Optional) List of source port ranges. Defaults to ["*"].<br/>      - destination\_port\_ranges: (Optional) List of destination port ranges. Defaults to ["*"].<br/>      - source:                  (Optional) List of source address prefixes.<br/>        - address\_prefix:      (Required) The address prefix.<br/>        - address\_prefix\_type: (Required) The type. Possible values: "IPPrefix", "ServiceTag".<br/>      - destination:             (Optional) List of destination address prefixes.<br/>        - address\_prefix:      (Required) The address prefix.<br/>        - address\_prefix\_type: (Required) The type. Possible values: "IPPrefix", "ServiceTag". | <pre>list(object({<br/>    name        = string<br/>    description = optional(string, null)<br/>    rule_collections = optional(list(object({<br/>      name              = string<br/>      description       = optional(string, null)<br/>      network_group_ids = list(string)<br/>      rules = optional(list(object({<br/>        name                    = string<br/>        description             = optional(string, null)<br/>        action                  = string<br/>        direction               = string<br/>        priority                = number<br/>        protocol                = string<br/>        source_port_ranges      = optional(list(string), ["*"])<br/>        destination_port_ranges = optional(list(string), ["*"])<br/>        source = optional(list(object({<br/>          address_prefix      = string<br/>          address_prefix_type = string<br/>        })), [])<br/>        destination = optional(list(object({<br/>          address_prefix      = string<br/>          address_prefix_type = string<br/>        })), [])<br/>      })), [])<br/>    })), [])<br/>  }))</pre> | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the Virtual Network Manager and related resources. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) The workload or application name, used for naming convention. | `string` | `"shared"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_admin_rule_collection_ids"></a> [admin\_rule\_collection\_ids](#output\_admin\_rule\_collection\_ids) | A map of Admin Rule Collection names to their IDs. |
+| <a name="output_connectivity_configuration_ids"></a> [connectivity\_configuration\_ids](#output\_connectivity\_configuration\_ids) | A map of Connectivity Configuration names to their IDs. |
+| <a name="output_cross_tenant_scopes"></a> [cross\_tenant\_scopes](#output\_cross\_tenant\_scopes) | The cross-tenant scopes of the Virtual Network Manager. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Virtual Network Manager. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Virtual Network Manager. |
+| <a name="output_network_group_ids"></a> [network\_group\_ids](#output\_network\_group\_ids) | A map of Network Group names to their IDs. |
+| <a name="output_security_admin_configuration_ids"></a> [security\_admin\_configuration\_ids](#output\_security\_admin\_configuration\_ids) | A map of Security Admin Configuration names to their IDs. |
+<!-- END_TF_DOCS -->

@@ -47,3 +47,39 @@ module "azuread_group" {
 
 Este módulo ha sido desarrollado para la gestión de grupos en Azure Active Directory.
 
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azuread_group.group](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_group_name"></a> [group\_name](#input\_group\_name) | value of the azuread group name | `string` | n/a | yes |
+| <a name="input_owners"></a> [owners](#input\_owners) | value of the azuread group owners | `set(string)` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_display_name"></a> [display\_name](#output\_display\_name) | value of the azuread group display name |
+| <a name="output_id"></a> [id](#output\_id) | value of the azuread group id |
+<!-- END_TF_DOCS -->

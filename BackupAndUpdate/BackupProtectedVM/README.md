@@ -160,3 +160,50 @@ module "vm_backup" {
 - Use `exclude_disk_luns` for VMs with non-critical data disks
 - OS disk is always backed up (cannot be excluded)
 - Soft delete protection applies to backup data
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_backup_protected_vm.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/backup_protected_vm) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_backup_policy_id"></a> [backup\_policy\_id](#input\_backup\_policy\_id) | (Required) The ID of the Backup Policy. DEPENDENCY: Backup Policy must exist. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to enable backup protection. | `bool` | `true` | no |
+| <a name="input_exclude_disk_luns"></a> [exclude\_disk\_luns](#input\_exclude\_disk\_luns) | (Optional) List of disk LUNs to exclude from backup. | `list(number)` | `null` | no |
+| <a name="input_include_disk_luns"></a> [include\_disk\_luns](#input\_include\_disk\_luns) | (Optional) List of disk LUNs to include in backup. If null, all disks are included. | `list(number)` | `null` | no |
+| <a name="input_protection_state"></a> [protection\_state](#input\_protection\_state) | (Optional) The protection state. Values: Invalid, IRPending, Protected, etc. | `string` | `null` | no |
+| <a name="input_recovery_vault_name"></a> [recovery\_vault\_name](#input\_recovery\_vault\_name) | (Required) The name of the Recovery Services Vault. DEPENDENCY: Vault must exist. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group containing the Vault. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_source_vm_id"></a> [source\_vm\_id](#input\_source\_vm\_id) | (Required) The ID of the VM to protect. DEPENDENCY: VM must exist. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_backup_policy_id"></a> [backup\_policy\_id](#output\_backup\_policy\_id) | The ID of the Backup Policy applied. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Backup Protected VM. |
+| <a name="output_source_vm_id"></a> [source\_vm\_id](#output\_source\_vm\_id) | The ID of the protected VM. |
+| <a name="output_vm_name"></a> [vm\_name](#output\_vm\_name) | The name of the protected VM. |
+<!-- END_TF_DOCS -->

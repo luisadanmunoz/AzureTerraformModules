@@ -76,3 +76,54 @@ module "load_balancer_external" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de Load Balancer externo en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_lb.lbe](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/lb) | resource |
+| [azurerm_lb_backend_address_pool.lbe_backend_address_pool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/lb_backend_address_pool) | resource |
+| [azurerm_lb_probe.lbe_probe](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/lb_probe) | resource |
+| [azurerm_lb_rule.lb_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/lb_rule) | resource |
+| [azurerm_monitor_diagnostic_setting.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_network_interface_backend_address_pool_association.nic-pa-hub-01-nic-untrust](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_backend_address_pool_association) | resource |
+| [azurerm_network_interface_backend_address_pool_association.nic-pa-hub-02-nic-untrust](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_backend_address_pool_association) | resource |
+| [azurerm_monitor_diagnostic_categories.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_backend_address_pool_ids"></a> [backend\_address\_pool\_ids](#input\_backend\_address\_pool\_ids) | ############################################################################ LOAD BALANCER - RULE ############################################################################ | `list(string)` | n/a | yes |
+| <a name="input_ip_configuration_name_01"></a> [ip\_configuration\_name\_01](#input\_ip\_configuration\_name\_01) | n/a | `string` | n/a | yes |
+| <a name="input_ip_configuration_name_02"></a> [ip\_configuration\_name\_02](#input\_ip\_configuration\_name\_02) | n/a | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ LOAD BALANCER VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_diagnostic_setting"></a> [name\_diagnostic\_setting](#input\_name\_diagnostic\_setting) | ############################################################################ LOAD BALANCER - DIAGNOSTIC SETTINGS ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_ip"></a> [name\_ip](#input\_name\_ip) | n/a | `string` | n/a | yes |
+| <a name="input_network_interface_id_01"></a> [network\_interface\_id\_01](#input\_network\_interface\_id\_01) | ############################################################################ LOAD BALANCER - BACKEND ############################################################################ | `string` | n/a | yes |
+| <a name="input_network_interface_id_02"></a> [network\_interface\_id\_02](#input\_network\_interface\_id\_02) | n/a | `string` | n/a | yes |
+| <a name="input_public_ip_address_id"></a> [public\_ip\_address\_id](#input\_public\_ip\_address\_id) | n/a | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_sku"></a> [sku](#input\_sku) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map` | `{}` | no |
+| <a name="input_workspace_resource_id"></a> [workspace\_resource\_id](#input\_workspace\_resource\_id) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

@@ -269,3 +269,64 @@ module "nsg" {
 - Priority range is 100-4096 (lower numbers evaluated first)
 - Azure has default rules that cannot be deleted (priorities 65000-65500)
 - NSG flow logs require Network Watcher in the region
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_network_security_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
+| [azurerm_network_security_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_allow_http"></a> [allow\_http](#input\_allow\_http) | (Optional) Enable a preset rule to allow HTTP (port 80) from specified sources. | <pre>object({<br/>    enabled                = bool<br/>    priority               = optional(number, 130)<br/>    source_address_prefix  = optional(string, "*")<br/>    source_address_prefixes = optional(list(string), null)<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_allow_https"></a> [allow\_https](#input\_allow\_https) | (Optional) Enable a preset rule to allow HTTPS (port 443) from specified sources. | <pre>object({<br/>    enabled                = bool<br/>    priority               = optional(number, 120)<br/>    source_address_prefix  = optional(string, "*")<br/>    source_address_prefixes = optional(list(string), null)<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_allow_rdp"></a> [allow\_rdp](#input\_allow\_rdp) | (Optional) Enable a preset rule to allow RDP (port 3389) from specified sources. | <pre>object({<br/>    enabled                = bool<br/>    priority               = optional(number, 110)<br/>    source_address_prefix  = optional(string, "*")<br/>    source_address_prefixes = optional(list(string), null)<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_allow_ssh"></a> [allow\_ssh](#input\_allow\_ssh) | (Optional) Enable a preset rule to allow SSH (port 22) from specified sources. | <pre>object({<br/>    enabled                = bool<br/>    priority               = optional(number, 100)<br/>    source_address_prefix  = optional(string, "*")<br/>    source_address_prefixes = optional(list(string), null)<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Network Security Group. Set to false to disable resource creation without removing module code. | `bool` | `true` | no |
+| <a name="input_deny_all_inbound"></a> [deny\_all\_inbound](#input\_deny\_all\_inbound) | (Optional) Enable a preset rule to deny all inbound traffic (lowest priority). | <pre>object({<br/>    enabled  = bool<br/>    priority = optional(number, 4096)<br/>  })</pre> | <pre>{<br/>  "enabled": false<br/>}</pre> | no |
+| <a name="input_diagnostic_settings"></a> [diagnostic\_settings](#input\_diagnostic\_settings) | (Optional) Diagnostic settings configuration for the NSG.<br/>DEPENDENCY: Log Analytics Workspace, Storage Account, or Event Hub must exist.<br/><br/>Attributes:<br/>  - name: Name of the diagnostic setting.<br/>  - log\_analytics\_workspace\_id: Resource ID of the Log Analytics Workspace.<br/>  - storage\_account\_id: Resource ID of the Storage Account for archival.<br/>  - eventhub\_authorization\_rule\_id: Authorization rule ID for Event Hub.<br/>  - eventhub\_name: Name of the Event Hub.<br/>  - log\_categories: List of log categories to enable. | <pre>object({<br/>    name                           = optional(string, "diag-nsg")<br/>    log_analytics_workspace_id     = optional(string, null)<br/>    storage_account_id             = optional(string, null)<br/>    eventhub_authorization_rule_id = optional(string, null)<br/>    eventhub_name                  = optional(string, null)<br/>    log_categories                 = optional(list(string), ["NetworkSecurityGroupEvent", "NetworkSecurityGroupRuleCounter"])<br/>  })</pre> | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) The environment name (e.g., dev, staging, prod), used for naming convention. | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number or identifier for naming convention. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the NSG will be deployed.<br/>DEPENDENCY: Should match the Resource Group location. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the NSG. If provided, overrides name\_prefix/name\_suffix logic. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix to prepend to the generated NSG name. Used when 'name' is not provided. | `string` | `"nsg"` | no |
+| <a name="input_name_suffix"></a> [name\_suffix](#input\_name\_suffix) | (Optional) Suffix to append to the generated NSG name. Used when 'name' is not provided. | `string` | `""` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the NSG will be created.<br/>DEPENDENCY: Resource Group must exist before creating the NSG. | `string` | n/a | yes |
+| <a name="input_security_rules"></a> [security\_rules](#input\_security\_rules) | (Optional) Map of security rules to create in the NSG.<br/><br/>Attributes:<br/>  - priority: Rule priority (100-4096). Lower numbers are evaluated first.<br/>  - direction: "Inbound" or "Outbound".<br/>  - access: "Allow" or "Deny".<br/>  - protocol: "Tcp", "Udp", "Icmp", "Esp", "Ah", or "*".<br/>  - source\_port\_range: Source port or range (e.g., "80", "80-443", "*").<br/>  - source\_port\_ranges: List of source ports (alternative to source\_port\_range).<br/>  - destination\_port\_range: Destination port or range.<br/>  - destination\_port\_ranges: List of destination ports.<br/>  - source\_address\_prefix: Source CIDR, service tag, or "*".<br/>  - source\_address\_prefixes: List of source CIDRs.<br/>  - source\_application\_security\_group\_ids: List of source ASG IDs.<br/>  - destination\_address\_prefix: Destination CIDR, service tag, or "*".<br/>  - destination\_address\_prefixes: List of destination CIDRs.<br/>  - destination\_application\_security\_group\_ids: List of destination ASG IDs.<br/>  - description: Optional rule description. | <pre>map(object({<br/>    priority                                   = number<br/>    direction                                  = string<br/>    access                                     = string<br/>    protocol                                   = string<br/>    source_port_range                          = optional(string, null)<br/>    source_port_ranges                         = optional(list(string), null)<br/>    destination_port_range                     = optional(string, null)<br/>    destination_port_ranges                    = optional(list(string), null)<br/>    source_address_prefix                      = optional(string, null)<br/>    source_address_prefixes                    = optional(list(string), null)<br/>    source_application_security_group_ids      = optional(list(string), null)<br/>    destination_address_prefix                 = optional(string, null)<br/>    destination_address_prefixes               = optional(list(string), null)<br/>    destination_application_security_group_ids = optional(list(string), null)<br/>    description                                = optional(string, null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the NSG. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) The workload or purpose name, used for naming convention. | `string` | `"default"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_diagnostic_settings_id"></a> [diagnostic\_settings\_id](#output\_diagnostic\_settings\_id) | The ID of the diagnostic settings (if created). |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Network Security Group. |
+| <a name="output_location"></a> [location](#output\_location) | The Azure region where the NSG is deployed. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Network Security Group. |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the Resource Group containing the NSG. |
+| <a name="output_security_rule_ids"></a> [security\_rule\_ids](#output\_security\_rule\_ids) | Map of security rule names to their IDs. |
+| <a name="output_security_rules"></a> [security\_rules](#output\_security\_rules) | Map of security rule names to their full configuration. |
+<!-- END_TF_DOCS -->

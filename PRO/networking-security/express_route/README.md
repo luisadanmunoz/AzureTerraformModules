@@ -86,3 +86,62 @@ module "express_route" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de ExpressRoute en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_express_route_circuit.express_route](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/express_route_circuit) | resource |
+| [azurerm_express_route_circuit_peering.peering](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/express_route_circuit_peering) | resource |
+| [azurerm_monitor_diagnostic_setting.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_virtual_network_gateway_connection.connection](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_gateway_connection) | resource |
+| [azurerm_monitor_diagnostic_categories.diagnostic_setting](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_diagnostic_categories) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_bandwidth_in_mbps"></a> [bandwidth\_in\_mbps](#input\_bandwidth\_in\_mbps) | n/a | `map` | `{}` | no |
+| <a name="input_express_route_circuit_name"></a> [express\_route\_circuit\_name](#input\_express\_route\_circuit\_name) | n/a | `string` | n/a | yes |
+| <a name="input_family"></a> [family](#input\_family) | n/a | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | n/a | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | ############################################################################ EXPRESS ROUTE CIRCUIT VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_connection"></a> [name\_connection](#input\_name\_connection) | ############################################################################ VIRTUAL NETWORK GATEWAY CONNECTION - TYPE EXPRESS ROUTE ############################################################################ | `string` | n/a | yes |
+| <a name="input_name_diagnostic_setting"></a> [name\_diagnostic\_setting](#input\_name\_diagnostic\_setting) | ############################################################################ DIAGNOSTIC SETTINGS ############################################################################ | `string` | n/a | yes |
+| <a name="input_peer_asn"></a> [peer\_asn](#input\_peer\_asn) | n/a | `map` | `{}` | no |
+| <a name="input_peering_location"></a> [peering\_location](#input\_peering\_location) | n/a | `string` | n/a | yes |
+| <a name="input_peering_type"></a> [peering\_type](#input\_peering\_type) | ############################################################################ EXPRESS ROUTE CIRCUIT PEERING ############################################################################ | `string` | n/a | yes |
+| <a name="input_primary_peer_address_prefix"></a> [primary\_peer\_address\_prefix](#input\_primary\_peer\_address\_prefix) | n/a | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | n/a | `string` | n/a | yes |
+| <a name="input_secondary_peer_address_prefix"></a> [secondary\_peer\_address\_prefix](#input\_secondary\_peer\_address\_prefix) | n/a | `string` | n/a | yes |
+| <a name="input_service_provider_name"></a> [service\_provider\_name](#input\_service\_provider\_name) | n/a | `string` | n/a | yes |
+| <a name="input_shared_key"></a> [shared\_key](#input\_shared\_key) | n/a | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map` | `{}` | no |
+| <a name="input_tier"></a> [tier](#input\_tier) | n/a | `string` | n/a | yes |
+| <a name="input_type"></a> [type](#input\_type) | n/a | `string` | n/a | yes |
+| <a name="input_virtual_network_gateway_id"></a> [virtual\_network\_gateway\_id](#input\_virtual\_network\_gateway\_id) | n/a | `string` | n/a | yes |
+| <a name="input_vlan_id"></a> [vlan\_id](#input\_vlan\_id) | n/a | `map` | `{}` | no |
+| <a name="input_workspace_resource_id"></a> [workspace\_resource\_id](#input\_workspace\_resource\_id) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ############################################################################ EXPRESS ROUTE CIRCUIT OUTPUT ############################################################################ |
+| <a name="output_name"></a> [name](#output\_name) | n/a |
+<!-- END_TF_DOCS -->

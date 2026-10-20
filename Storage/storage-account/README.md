@@ -310,3 +310,82 @@ resource "azurerm_private_endpoint" "blob" {
 4. **Habilitar soft delete**: Para recuperacion ante borrados accidentales
 5. **Usar RBAC**: Preferir roles sobre shared keys
 6. **Monitorear**: Habilitar diagnosticos para auditar accesos
+
+<!-- BEGIN_TF_DOCS -->
+# Azure Storage Account Module
+
+Modulo reutilizable para crear Storage Accounts en Azure.
+Incluye configuracion de seguridad, networking, blob containers y file shares.
+
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_diagnostic_setting.blob](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_storage_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
+| [azurerm_storage_container.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
+| [azurerm_storage_share.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_share) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_access_tier"></a> [access\_tier](#input\_access\_tier) | Tier de acceso por defecto (Hot o Cool) | `string` | `"Hot"` | no |
+| <a name="input_account_kind"></a> [account\_kind](#input\_account\_kind) | Tipo de Storage Account | `string` | `"StorageV2"` | no |
+| <a name="input_account_replication_type"></a> [account\_replication\_type](#input\_account\_replication\_type) | Tipo de replicacion (LRS, GRS, RAGRS, ZRS, GZRS, RAGZRS) | `string` | `"LRS"` | no |
+| <a name="input_account_tier"></a> [account\_tier](#input\_account\_tier) | Tier de rendimiento (Standard o Premium) | `string` | `"Standard"` | no |
+| <a name="input_blob_change_feed_enabled"></a> [blob\_change\_feed\_enabled](#input\_blob\_change\_feed\_enabled) | Habilitar change feed | `bool` | `false` | no |
+| <a name="input_blob_delete_retention_days"></a> [blob\_delete\_retention\_days](#input\_blob\_delete\_retention\_days) | Dias de retencion para blobs eliminados (0 para deshabilitar) | `number` | `7` | no |
+| <a name="input_blob_last_access_time_enabled"></a> [blob\_last\_access\_time\_enabled](#input\_blob\_last\_access\_time\_enabled) | Habilitar tracking de ultimo acceso | `bool` | `false` | no |
+| <a name="input_blob_versioning_enabled"></a> [blob\_versioning\_enabled](#input\_blob\_versioning\_enabled) | Habilitar versionado de blobs | `bool` | `false` | no |
+| <a name="input_container_delete_retention_days"></a> [container\_delete\_retention\_days](#input\_container\_delete\_retention\_days) | Dias de retencion para containers eliminados | `number` | `7` | no |
+| <a name="input_containers"></a> [containers](#input\_containers) | Lista de blob containers a crear | <pre>list(object({<br/>    name        = string<br/>    access_type = optional(string, "private")<br/>  }))</pre> | `[]` | no |
+| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tags por defecto | `map(string)` | <pre>{<br/>  "ManagedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_enable_blob_properties"></a> [enable\_blob\_properties](#input\_enable\_blob\_properties) | Habilitar configuracion de blob properties | `bool` | `true` | no |
+| <a name="input_enable_network_rules"></a> [enable\_network\_rules](#input\_enable\_network\_rules) | Habilitar reglas de red | `bool` | `false` | no |
+| <a name="input_file_shares"></a> [file\_shares](#input\_file\_shares) | Lista de file shares a crear | <pre>list(object({<br/>    name        = string<br/>    quota       = number<br/>    access_tier = optional(string, "TransactionOptimized")<br/>  }))</pre> | `[]` | no |
+| <a name="input_https_traffic_only_enabled"></a> [https\_traffic\_only\_enabled](#input\_https\_traffic\_only\_enabled) | Permitir solo trafico HTTPS | `bool` | `true` | no |
+| <a name="input_identity_ids"></a> [identity\_ids](#input\_identity\_ids) | Lista de IDs de identidades asignadas por usuario | `list(string)` | `[]` | no |
+| <a name="input_identity_type"></a> [identity\_type](#input\_identity\_type) | Tipo de identidad (SystemAssigned, UserAssigned, SystemAssigned,UserAssigned) | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region de Azure | `string` | n/a | yes |
+| <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id) | ID del Log Analytics Workspace para diagnosticos | `string` | `null` | no |
+| <a name="input_min_tls_version"></a> [min\_tls\_version](#input\_min\_tls\_version) | Version minima de TLS | `string` | `"TLS1_2"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Nombre del Storage Account (debe ser globalmente unico) | `string` | n/a | yes |
+| <a name="input_network_bypass"></a> [network\_bypass](#input\_network\_bypass) | Servicios que pueden bypasear las reglas de red | `list(string)` | <pre>[<br/>  "AzureServices",<br/>  "Logging",<br/>  "Metrics"<br/>]</pre> | no |
+| <a name="input_network_default_action"></a> [network\_default\_action](#input\_network\_default\_action) | Accion por defecto para trafico de red | `string` | `"Deny"` | no |
+| <a name="input_network_ip_rules"></a> [network\_ip\_rules](#input\_network\_ip\_rules) | Lista de IPs o rangos CIDR permitidos | `list(string)` | `[]` | no |
+| <a name="input_network_subnet_ids"></a> [network\_subnet\_ids](#input\_network\_subnet\_ids) | Lista de IDs de subnets permitidas | `list(string)` | `[]` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Permitir acceso desde redes publicas | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Nombre del Resource Group | `string` | n/a | yes |
+| <a name="input_shared_access_key_enabled"></a> [shared\_access\_key\_enabled](#input\_shared\_access\_key\_enabled) | Permitir acceso mediante Shared Access Keys | `bool` | `true` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags adicionales | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_container_ids"></a> [container\_ids](#output\_container\_ids) | IDs de los containers creados |
+| <a name="output_file_share_ids"></a> [file\_share\_ids](#output\_file\_share\_ids) | IDs de los file shares creados |
+| <a name="output_id"></a> [id](#output\_id) | ID del Storage Account |
+| <a name="output_identity"></a> [identity](#output\_identity) | Identidad del Storage Account |
+| <a name="output_name"></a> [name](#output\_name) | Nombre del Storage Account |
+| <a name="output_primary_access_key"></a> [primary\_access\_key](#output\_primary\_access\_key) | Clave de acceso primaria |
+| <a name="output_primary_blob_endpoint"></a> [primary\_blob\_endpoint](#output\_primary\_blob\_endpoint) | Endpoint primario de blob |
+| <a name="output_primary_connection_string"></a> [primary\_connection\_string](#output\_primary\_connection\_string) | Cadena de conexion primaria |
+| <a name="output_primary_file_endpoint"></a> [primary\_file\_endpoint](#output\_primary\_file\_endpoint) | Endpoint primario de files |
+| <a name="output_secondary_access_key"></a> [secondary\_access\_key](#output\_secondary\_access\_key) | Clave de acceso secundaria |
+<!-- END_TF_DOCS -->

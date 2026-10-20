@@ -358,3 +358,73 @@ resource "azurerm_role_assignment" "app_kv" {
   principal_id         = azurerm_linux_web_app.app.identity[0].principal_id
 }
 ```
+
+<!-- BEGIN_TF_DOCS -->
+# Azure Key Vault Module
+
+Modulo reutilizable para crear Key Vaults en Azure.
+Soporta access policies, RBAC, network rules y purge protection.
+
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_key_vault.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) | resource |
+| [azurerm_key_vault_secret.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_monitor_diagnostic_setting.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_access_policies"></a> [access\_policies](#input\_access\_policies) | Lista de access policies (ignorado si RBAC esta habilitado) | <pre>list(object({<br/>    tenant_id               = optional(string)<br/>    object_id               = string<br/>    application_id          = optional(string)<br/>    certificate_permissions = optional(list(string), [])<br/>    key_permissions         = optional(list(string), [])<br/>    secret_permissions      = optional(list(string), [])<br/>    storage_permissions     = optional(list(string), [])<br/>  }))</pre> | `[]` | no |
+| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tags por defecto | `map(string)` | <pre>{<br/>  "ManagedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_enable_network_acls"></a> [enable\_network\_acls](#input\_enable\_network\_acls) | Habilitar Network ACLs | `bool` | `false` | no |
+| <a name="input_enable_rbac_authorization"></a> [enable\_rbac\_authorization](#input\_enable\_rbac\_authorization) | Usar RBAC en lugar de Access Policies | `bool` | `true` | no |
+| <a name="input_enabled_for_deployment"></a> [enabled\_for\_deployment](#input\_enabled\_for\_deployment) | Permitir VMs acceder a certificados | `bool` | `false` | no |
+| <a name="input_enabled_for_disk_encryption"></a> [enabled\_for\_disk\_encryption](#input\_enabled\_for\_disk\_encryption) | Permitir Azure Disk Encryption acceder a secrets | `bool` | `false` | no |
+| <a name="input_enabled_for_template_deployment"></a> [enabled\_for\_template\_deployment](#input\_enabled\_for\_template\_deployment) | Permitir ARM templates acceder a secrets | `bool` | `false` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region de Azure | `string` | n/a | yes |
+| <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id) | ID del Log Analytics Workspace para diagnosticos | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | Nombre del Key Vault (debe ser globalmente unico) | `string` | n/a | yes |
+| <a name="input_network_bypass"></a> [network\_bypass](#input\_network\_bypass) | Servicios que pueden bypasear Network ACLs | `string` | `"AzureServices"` | no |
+| <a name="input_network_default_action"></a> [network\_default\_action](#input\_network\_default\_action) | Accion por defecto para Network ACLs | `string` | `"Deny"` | no |
+| <a name="input_network_ip_rules"></a> [network\_ip\_rules](#input\_network\_ip\_rules) | Lista de IPs o rangos CIDR permitidos | `list(string)` | `[]` | no |
+| <a name="input_network_subnet_ids"></a> [network\_subnet\_ids](#input\_network\_subnet\_ids) | Lista de IDs de subnets permitidas | `list(string)` | `[]` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Permitir acceso desde redes publicas | `bool` | `true` | no |
+| <a name="input_purge_protection_enabled"></a> [purge\_protection\_enabled](#input\_purge\_protection\_enabled) | Habilitar proteccion contra purga | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Nombre del Resource Group | `string` | n/a | yes |
+| <a name="input_secrets"></a> [secrets](#input\_secrets) | Lista de secrets a crear | <pre>list(object({<br/>    name            = string<br/>    value           = string<br/>    content_type    = optional(string)<br/>    expiration_date = optional(string)<br/>    not_before_date = optional(string)<br/>    tags            = optional(map(string), {})<br/>  }))</pre> | `[]` | no |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | SKU del Key Vault (standard o premium) | `string` | `"standard"` | no |
+| <a name="input_soft_delete_retention_days"></a> [soft\_delete\_retention\_days](#input\_soft\_delete\_retention\_days) | Dias de retencion para soft delete | `number` | `90` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags adicionales | `map(string)` | `{}` | no |
+| <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id) | Tenant ID de Azure AD (si no se especifica, se usa el actual) | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ID del Key Vault |
+| <a name="output_location"></a> [location](#output\_location) | Ubicacion del Key Vault |
+| <a name="output_name"></a> [name](#output\_name) | Nombre del Key Vault |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Resource Group del Key Vault |
+| <a name="output_secret_ids"></a> [secret\_ids](#output\_secret\_ids) | IDs de los secrets creados |
+| <a name="output_secret_versionless_ids"></a> [secret\_versionless\_ids](#output\_secret\_versionless\_ids) | IDs sin version de los secrets creados |
+| <a name="output_tenant_id"></a> [tenant\_id](#output\_tenant\_id) | Tenant ID del Key Vault |
+| <a name="output_vault_uri"></a> [vault\_uri](#output\_vault\_uri) | URI del Key Vault |
+<!-- END_TF_DOCS -->

@@ -148,3 +148,47 @@ module "firewall_rules_nat" {
 3. **Least privilege** - Only allow required ports, protocols, and destinations
 4. **Use IP groups** - Reference IP groups for reusable address sets across rules
 5. **Separate concerns** - Create separate rule collection groups per workload or environment
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_firewall_policy_rule_collection_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/firewall_policy_rule_collection_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_application_rule_collections"></a> [application\_rule\_collections](#input\_application\_rule\_collections) | List of application rule collections for the Rule Collection Group. | <pre>list(object({<br/>    name     = string<br/>    priority = number<br/>    action   = string<br/>    rules = list(object({<br/>      name                  = string<br/>      description           = optional(string)<br/>      source_addresses      = optional(list(string))<br/>      source_ip_groups      = optional(list(string))<br/>      destination_fqdns     = optional(list(string))<br/>      destination_fqdn_tags = optional(list(string))<br/>      destination_urls      = optional(list(string))<br/>      destination_addresses = optional(list(string))<br/>      terminate_tls         = optional(bool)<br/>      web_categories        = optional(list(string))<br/>      protocols = optional(list(object({<br/>        type = string<br/>        port = number<br/>      })))<br/>    }))<br/>  }))</pre> | `[]` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_firewall_policy_id"></a> [firewall\_policy\_id](#input\_firewall\_policy\_id) | The ID of the Firewall Policy where the Rule Collection Group will be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Firewall Policy Rule Collection Group. | `string` | n/a | yes |
+| <a name="input_nat_rule_collections"></a> [nat\_rule\_collections](#input\_nat\_rule\_collections) | List of NAT rule collections for the Rule Collection Group. | <pre>list(object({<br/>    name     = string<br/>    priority = number<br/>    action   = string<br/>    rules = list(object({<br/>      name                = string<br/>      description         = optional(string)<br/>      source_addresses    = optional(list(string))<br/>      source_ip_groups    = optional(list(string))<br/>      destination_address = optional(string)<br/>      destination_ports   = optional(list(string))<br/>      protocols           = list(string)<br/>      translated_address  = optional(string)<br/>      translated_fqdn    = optional(string)<br/>      translated_port     = string<br/>    }))<br/>  }))</pre> | `[]` | no |
+| <a name="input_network_rule_collections"></a> [network\_rule\_collections](#input\_network\_rule\_collections) | List of network rule collections for the Rule Collection Group. | <pre>list(object({<br/>    name     = string<br/>    priority = number<br/>    action   = string<br/>    rules = list(object({<br/>      name                  = string<br/>      description           = optional(string)<br/>      source_addresses      = optional(list(string))<br/>      source_ip_groups      = optional(list(string))<br/>      destination_addresses = optional(list(string))<br/>      destination_ip_groups = optional(list(string))<br/>      destination_fqdns     = optional(list(string))<br/>      destination_ports     = list(string)<br/>      protocols             = list(string)<br/>    }))<br/>  }))</pre> | `[]` | no |
+| <a name="input_priority"></a> [priority](#input\_priority) | The priority of the Rule Collection Group (100-65000). Lower values are processed first. | `number` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Firewall Policy Rule Collection Group. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Firewall Policy Rule Collection Group. |
+<!-- END_TF_DOCS -->

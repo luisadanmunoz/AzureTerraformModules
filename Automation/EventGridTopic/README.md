@@ -203,3 +203,60 @@ This module has the following dependencies:
 ## License
 
 This module is licensed under the MIT License.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_eventgrid_topic.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/eventgrid_topic) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether the Event Grid Topic should be created. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to use for the generated name. | `string` | `null` | no |
+| <a name="input_identity"></a> [identity](#input\_identity) | An identity block for the Event Grid Topic. | <pre>object({<br/>    type         = string<br/>    identity_ids = optional(list(string))<br/>  })</pre> | `null` | no |
+| <a name="input_inbound_ip_rule"></a> [inbound\_ip\_rule](#input\_inbound\_ip\_rule) | A list of inbound IP rules for the Event Grid Topic. | <pre>list(object({<br/>    ip_mask = string<br/>    action  = optional(string, "Allow")<br/>  }))</pre> | `[]` | no |
+| <a name="input_input_mapping_default_values"></a> [input\_mapping\_default\_values](#input\_input\_mapping\_default\_values) | Default values used when the input event does not include certain fields. Only applicable when input\_schema is CustomEventSchema. | <pre>object({<br/>    event_type   = optional(string)<br/>    subject      = optional(string)<br/>    data_version = optional(string)<br/>  })</pre> | `null` | no |
+| <a name="input_input_mapping_fields"></a> [input\_mapping\_fields](#input\_input\_mapping\_fields) | A mapping of input field names to their corresponding schema fields. Only applicable when input\_schema is CustomEventSchema. | <pre>object({<br/>    id           = optional(string)<br/>    topic        = optional(string)<br/>    event_time   = optional(string)<br/>    event_type   = optional(string)<br/>    subject      = optional(string)<br/>    data_version = optional(string)<br/>  })</pre> | `null` | no |
+| <a name="input_input_schema"></a> [input\_schema](#input\_input\_schema) | The schema in which incoming events will be published. Allowed values are EventGridSchema, CustomEventSchema, or CloudEventSchemaV1\_0. | `string` | `"EventGridSchema"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to use for the generated name. | `string` | `null` | no |
+| <a name="input_local_auth_enabled"></a> [local\_auth\_enabled](#input\_local\_auth\_enabled) | Whether or not local authentication is enabled for this Event Grid Topic. | `bool` | `true` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the Event Grid Topic should be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Event Grid Topic. If provided, overrides the generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The prefix for the generated Event Grid Topic name. | `string` | `"evgt"` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Whether or not public network access is allowed for this Event Grid Topic. | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which to create the Event Grid Topic. # DEPENDENCY: azurerm\_resource\_group | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to the Event Grid Topic. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to use for the generated name. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_endpoint"></a> [endpoint](#output\_endpoint) | The endpoint URI of the Event Grid Topic. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Event Grid Topic. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Event Grid Topic. |
+| <a name="output_primary_access_key"></a> [primary\_access\_key](#output\_primary\_access\_key) | The primary access key of the Event Grid Topic. |
+| <a name="output_principal_id"></a> [principal\_id](#output\_principal\_id) | The Principal ID associated with the Managed Service Identity of the Event Grid Topic. |
+| <a name="output_secondary_access_key"></a> [secondary\_access\_key](#output\_secondary\_access\_key) | The secondary access key of the Event Grid Topic. |
+<!-- END_TF_DOCS -->

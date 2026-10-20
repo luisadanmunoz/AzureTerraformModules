@@ -59,3 +59,46 @@ module "data_collection_rule" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de reglas de recopilación de datos en Azure Monitor.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_data_collection_rule.dcr_vminsight](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
+| [azurerm_monitor_data_collection_rule.dcr_win](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_dcr_name"></a> [dcr\_name](#input\_dcr\_name) | value of the dcr name tag | `string` | n/a | yes |
+| <a name="input_dcr_vminsight_name"></a> [dcr\_vminsight\_name](#input\_dcr\_vminsight\_name) | value of the dcr vminsight name tag | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | value of the location tag | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | value of the resource group name tag | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | value of the tags tag | `map(any)` | n/a | yes |
+| <a name="input_workspace_resource_id"></a> [workspace\_resource\_id](#input\_workspace\_resource\_id) | value of the workspace resource id tag | `string` | n/a | yes |
+| <a name="input_workspace_resource_name"></a> [workspace\_resource\_name](#input\_workspace\_resource\_name) | value of the workspace resource name tag | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id_dcr_win"></a> [id\_dcr\_win](#output\_id\_dcr\_win) | value of the id tag |
+| <a name="output_id_vminsight"></a> [id\_vminsight](#output\_id\_vminsight) | value of the id tag |
+| <a name="output_name_dcr_win"></a> [name\_dcr\_win](#output\_name\_dcr\_win) | value of the name tag |
+| <a name="output_name_vminsight"></a> [name\_vminsight](#output\_name\_vminsight) | value of the name tag |
+<!-- END_TF_DOCS -->

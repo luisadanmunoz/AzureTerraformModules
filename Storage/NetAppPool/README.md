@@ -190,3 +190,56 @@ Resources that must exist before using this module:
   - **Auto**: Throughput is proportionally assigned based on volume quota
   - **Manual**: Throughput is manually set per volume, allowing for flexible allocation
 - Encryption type can only be set during pool creation and cannot be changed afterward
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_netapp_pool.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/netapp_pool) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_account_name"></a> [account\_name](#input\_account\_name) | (Required) The name of the NetApp Account in which to create the Capacity Pool.<br/>DEPENDENCY: NetApp Account must exist before creating the Capacity Pool. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the NetApp Capacity Pool. Set to false to disable resource creation without removing module code. | `bool` | `true` | no |
+| <a name="input_encryption_type"></a> [encryption\_type](#input\_encryption\_type) | (Optional) The encryption type of the Capacity Pool.<br/>Valid options are Single (single encryption) or Double (double encryption).<br/>If not specified, the platform default will be used. | `string` | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) The environment name (e.g., dev, staging, prod), used for naming convention. | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number or identifier for naming convention. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the NetApp Capacity Pool will be deployed.<br/>DEPENDENCY: Should match the Resource Group and NetApp Account location. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the NetApp Capacity Pool. If provided, overrides name\_prefix/workload/environment/instance logic. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix to prepend to the generated NetApp Capacity Pool name. Used when 'name' is not provided. Default is 'anfpool'. | `string` | `"anfpool"` | no |
+| <a name="input_qos_type"></a> [qos\_type](#input\_qos\_type) | (Optional) The QoS type of the Capacity Pool.<br/>Valid options are Auto (QoS based on volume throughput and size) or Manual (QoS manually set per volume).<br/>Default is Auto. | `string` | `"Auto"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the NetApp Capacity Pool will be created.<br/>DEPENDENCY: Resource Group must exist before creating the NetApp Capacity Pool. | `string` | n/a | yes |
+| <a name="input_service_level"></a> [service\_level](#input\_service\_level) | (Optional) The service level of the Capacity Pool.<br/>Valid options are Standard (16 MiB/s per TiB), Premium (64 MiB/s per TiB), or Ultra (128 MiB/s per TiB).<br/>Default is Standard. | `string` | `"Standard"` | no |
+| <a name="input_size_in_tb"></a> [size\_in\_tb](#input\_size\_in\_tb) | (Required) Size of the Capacity Pool in TiB.<br/>Minimum value is 4 TiB. Must be in increments of 1 TiB. | `number` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the NetApp Capacity Pool. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) The workload or application name, used for naming convention. | `string` | `"shared"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the NetApp Capacity Pool. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the NetApp Capacity Pool. |
+| <a name="output_service_level"></a> [service\_level](#output\_service\_level) | The service level of the NetApp Capacity Pool (Standard, Premium, or Ultra). |
+| <a name="output_size_in_tb"></a> [size\_in\_tb](#output\_size\_in\_tb) | The size of the NetApp Capacity Pool in TiB. |
+<!-- END_TF_DOCS -->

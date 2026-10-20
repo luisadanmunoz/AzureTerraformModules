@@ -43,3 +43,38 @@ module "cost_alert" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de alertas de anomalías de costos en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_cost_anomaly_alert.cost_alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cost_anomaly_alert) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | value of the display name tag | `string` | n/a | yes |
+| <a name="input_email_addresses"></a> [email\_addresses](#input\_email\_addresses) | value of the email addresses tag | `set(string)` | n/a | yes |
+| <a name="input_email_subject"></a> [email\_subject](#input\_email\_subject) | value of the email subject tag | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | value of the name tag | `string` | n/a | yes |
+| <a name="input_subscription_id"></a> [subscription\_id](#input\_subscription\_id) | value of the subscription id tag | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

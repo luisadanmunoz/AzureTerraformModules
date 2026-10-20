@@ -119,3 +119,59 @@ module "rotating_key" {
 3. **Enable rotation policies** - Automate key rotation to reduce operational overhead
 4. **Restrict key operations** - Only grant the minimum required key operations
 5. **Use EC keys for signing** - Prefer EC keys (P-256 or P-384) for digital signatures
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_key_vault_key.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether resources should be created. | `bool` | `true` | no |
+| <a name="input_curve"></a> [curve](#input\_curve) | The EC curve name (P-256, P-256K, P-384, P-521). Only applicable for EC key types. | `string` | `null` | no |
+| <a name="input_expiration_date"></a> [expiration\_date](#input\_expiration\_date) | The expiration date of the key in UTC (ISO 8601 format). | `string` | `null` | no |
+| <a name="input_key_opts"></a> [key\_opts](#input\_key\_opts) | A list of key operations permitted for this key. | `list(string)` | <pre>[<br/>  "decrypt",<br/>  "encrypt",<br/>  "sign",<br/>  "unwrapKey",<br/>  "verify",<br/>  "wrapKey"<br/>]</pre> | no |
+| <a name="input_key_size"></a> [key\_size](#input\_key\_size) | The size of the RSA key in bits (2048, 3072, 4096). Only applicable for RSA key types. | `number` | `2048` | no |
+| <a name="input_key_type"></a> [key\_type](#input\_key\_type) | The type of the Key Vault Key (RSA, RSA-HSM, EC, EC-HSM, oct). | `string` | n/a | yes |
+| <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | The ID of the Key Vault where the key will be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Key Vault Key. | `string` | n/a | yes |
+| <a name="input_not_before_date"></a> [not\_before\_date](#input\_not\_before\_date) | The date before which the key is not valid in UTC (ISO 8601 format). | `string` | `null` | no |
+| <a name="input_rotation_policy"></a> [rotation\_policy](#input\_rotation\_policy) | The rotation policy for the key. | <pre>object({<br/>    expire_after         = optional(string)<br/>    notify_before_expiry = optional(string)<br/>    automatic = optional(object({<br/>      time_after_creation = optional(string)<br/>      time_before_expiry  = optional(string)<br/>    }))<br/>  })</pre> | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to assign to the key. | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_e"></a> [e](#output\_e) | The RSA public exponent of the Key Vault Key. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Key Vault Key. |
+| <a name="output_n"></a> [n](#output\_n) | The RSA modulus of the Key Vault Key. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Key Vault Key. |
+| <a name="output_public_key_openssh"></a> [public\_key\_openssh](#output\_public\_key\_openssh) | The OpenSSH-encoded public key of the Key Vault Key. |
+| <a name="output_public_key_pem"></a> [public\_key\_pem](#output\_public\_key\_pem) | The PEM-encoded public key of the Key Vault Key. |
+| <a name="output_resource_id"></a> [resource\_id](#output\_resource\_id) | The Resource ID of the Key Vault Key. |
+| <a name="output_resource_versionless_id"></a> [resource\_versionless\_id](#output\_resource\_versionless\_id) | The versionless Resource ID of the Key Vault Key. |
+| <a name="output_version"></a> [version](#output\_version) | The current version of the Key Vault Key. |
+| <a name="output_versionless_id"></a> [versionless\_id](#output\_versionless\_id) | The versionless ID of the Key Vault Key. |
+<!-- END_TF_DOCS -->

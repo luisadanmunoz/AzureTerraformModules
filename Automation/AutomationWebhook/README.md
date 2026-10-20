@@ -178,3 +178,46 @@ Use HTTP action with:
 - Disable webhooks when not in use
 - Consider IP restrictions at the network level
 - Monitor webhook usage in Automation Account logs
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_automation_webhook.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_webhook) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | (Required) The name of the Automation Account. DEPENDENCY: Automation Account must exist. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Automation Webhooks. | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Automation Account exists. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_webhooks"></a> [webhooks](#input\_webhooks) | (Optional) Map of webhooks to create. The key is the webhook name.<br/>- runbook\_name: (Required) The name of the Runbook to trigger. DEPENDENCY: Runbook must exist.<br/>- expiry\_time: (Required) The expiry time in RFC3339 format (e.g., "2025-12-31T23:59:59Z").<br/>- enabled: (Optional) Whether the webhook is enabled. Default: true.<br/>- parameters: (Optional) Map of parameters to pass to the Runbook.<br/>- run\_on\_worker\_group: (Optional) Name of Hybrid Worker Group. DEPENDENCY: Hybrid Worker Group must exist if specified.<br/>- uri: (Optional) Custom URI for the webhook. If not provided, Azure generates one. | <pre>map(object({<br/>    runbook_name        = string<br/>    expiry_time         = string<br/>    enabled             = optional(bool, true)<br/>    parameters          = optional(map(string), {})<br/>    run_on_worker_group = optional(string, null)<br/>    uri                 = optional(string, null)<br/>  }))</pre> | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_webhook_expiry_times"></a> [webhook\_expiry\_times](#output\_webhook\_expiry\_times) | Map of webhook names to their expiry times. |
+| <a name="output_webhook_ids"></a> [webhook\_ids](#output\_webhook\_ids) | Map of webhook names to their IDs. |
+| <a name="output_webhook_names"></a> [webhook\_names](#output\_webhook\_names) | List of created webhook names. |
+| <a name="output_webhook_uris"></a> [webhook\_uris](#output\_webhook\_uris) | Map of webhook names to their URIs. SENSITIVE: Store securely. |
+<!-- END_TF_DOCS -->

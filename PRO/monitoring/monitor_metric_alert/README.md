@@ -63,3 +63,49 @@ module "monitor_metric_alert" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de alertas de métrica en Azure Monitor.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_monitor_metric_alert.monitor_metric_alert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_action_group_id"></a> [action\_group\_id](#input\_action\_group\_id) | value of the action group id tag | `string` | n/a | yes |
+| <a name="input_aggregation"></a> [aggregation](#input\_aggregation) | value of the aggregation tag | `string` | n/a | yes |
+| <a name="input_auto_mitigate"></a> [auto\_mitigate](#input\_auto\_mitigate) | value of the auto mitigate tag | `string` | n/a | yes |
+| <a name="input_description"></a> [description](#input\_description) | value of the description tag | `string` | n/a | yes |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | value of the enabled tag | `string` | n/a | yes |
+| <a name="input_frequency"></a> [frequency](#input\_frequency) | value of the frequency tag | `string` | n/a | yes |
+| <a name="input_metric_name"></a> [metric\_name](#input\_metric\_name) | value of the metric name tag | `string` | n/a | yes |
+| <a name="input_metric_namespace"></a> [metric\_namespace](#input\_metric\_namespace) | value of the metric namespace tag | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | value of the name tag | `string` | n/a | yes |
+| <a name="input_operator"></a> [operator](#input\_operator) | value of the operator tag | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | value of the resource group name tag | `string` | n/a | yes |
+| <a name="input_scopes"></a> [scopes](#input\_scopes) | value of the scopes tag | `any` | n/a | yes |
+| <a name="input_severity"></a> [severity](#input\_severity) | value of the severity tag | `string` | n/a | yes |
+| <a name="input_threshold"></a> [threshold](#input\_threshold) | value of the threshold tag | `string` | n/a | yes |
+| <a name="input_window_size"></a> [window\_size](#input\_window\_size) | value of the window size tag | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

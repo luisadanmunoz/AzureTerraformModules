@@ -223,3 +223,57 @@ module "schedule_with_expiry" {
 
 - **Resource Group** must exist
 - **Automation Account** must exist before creating Schedules
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_automation_schedule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/automation_schedule) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_automation_account_name"></a> [automation\_account\_name](#input\_automation\_account\_name) | (Required) The name of the Automation Account where the Schedule will be created. DEPENDENCY: Automation Account must exist. | `string` | n/a | yes |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Schedule. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | (Optional) A description for this Schedule. | `string` | `null` | no |
+| <a name="input_expiry_time"></a> [expiry\_time](#input\_expiry\_time) | (Optional) End time of the Schedule in RFC3339 format. Schedule will not run after this time. | `string` | `null` | no |
+| <a name="input_frequency"></a> [frequency](#input\_frequency) | (Required) The frequency of the Schedule. Possible values: OneTime, Hour, Day, Week, Month. | `string` | n/a | yes |
+| <a name="input_interval"></a> [interval](#input\_interval) | (Optional) The number of frequency intervals between runs. Required for Hour, Day, Week, Month frequencies. Valid range: 1-100. | `number` | `null` | no |
+| <a name="input_month_days"></a> [month\_days](#input\_month\_days) | (Optional) List of days of the month for monthly schedules. Values: 1-31, or -1 for last day. | `list(number)` | `null` | no |
+| <a name="input_monthly_occurrence"></a> [monthly\_occurrence](#input\_monthly\_occurrence) | (Optional) Monthly occurrence for schedules that run on a specific week day.<br/>- day: (Required) Day of the week. Values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.<br/>- occurrence: (Required) Week of the month. Values: 1 (First), 2 (Second), 3 (Third), 4 (Fourth), -1 (Last). | <pre>object({<br/>    day        = string<br/>    occurrence = number<br/>  })</pre> | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | (Required) The name of the Schedule. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Automation Account exists. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_start_time"></a> [start\_time](#input\_start\_time) | (Optional) Start time of the Schedule in RFC3339 format (e.g., 2024-01-01T06:00:00+00:00). Must be at least 5 minutes in the future. Defaults to 7 minutes from now. | `string` | `null` | no |
+| <a name="input_timezone"></a> [timezone](#input\_timezone) | (Optional) The timezone of the Schedule. Default: UTC. Examples: UTC, Europe/Madrid, America/New\_York. | `string` | `"UTC"` | no |
+| <a name="input_week_days"></a> [week\_days](#input\_week\_days) | (Optional) List of days of the week for weekly schedules. Values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. | `list(string)` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_expiry_time"></a> [expiry\_time](#output\_expiry\_time) | The expiry time of the Schedule. |
+| <a name="output_frequency"></a> [frequency](#output\_frequency) | The frequency of the Schedule. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Automation Schedule. |
+| <a name="output_interval"></a> [interval](#output\_interval) | The interval of the Schedule. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Automation Schedule. |
+| <a name="output_start_time"></a> [start\_time](#output\_start\_time) | The start time of the Schedule. |
+<!-- END_TF_DOCS -->

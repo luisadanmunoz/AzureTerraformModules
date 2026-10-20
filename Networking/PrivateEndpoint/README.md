@@ -184,3 +184,62 @@ module "pe_storage_static" {
 | ACR | `privatelink.azurecr.io` |
 | Event Hub | `privatelink.servicebus.windows.net` |
 | Cosmos DB | `privatelink.documents.azure.com` |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_private_endpoint.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Private Endpoint. | `bool` | `true` | no |
+| <a name="input_custom_network_interface_name"></a> [custom\_network\_interface\_name](#input\_custom\_network\_interface\_name) | (Optional) Custom name for the network interface. | `string` | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Environment name. | `string` | `"dev"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance identifier. | `string` | `"001"` | no |
+| <a name="input_ip_configuration"></a> [ip\_configuration](#input\_ip\_configuration) | (Optional) Static IP configuration for the private endpoint.<br/>By default, a dynamic IP is assigned from the subnet.<br/><br/>Attributes:<br/>  - name: Name for the IP configuration.<br/>  - subresource\_name: Subresource name (must match subresource\_names).<br/>  - member\_name: Member name (e.g., "default").<br/>  - private\_ip\_address: Static private IP address. | <pre>list(object({<br/>    name               = string<br/>    subresource_name   = optional(string, null)<br/>    member_name        = optional(string, "default")<br/>    private_ip_address = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the Private Endpoint will be deployed.<br/>DEPENDENCY: Should match the Resource Group and Subnet location. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the Private Endpoint. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix for generated name. | `string` | `"pe"` | no |
+| <a name="input_name_suffix"></a> [name\_suffix](#input\_name\_suffix) | (Optional) Suffix for generated name. | `string` | `""` | no |
+| <a name="input_private_dns_zone_group"></a> [private\_dns\_zone\_group](#input\_private\_dns\_zone\_group) | (Optional) Private DNS Zone Group configuration for automatic DNS registration.<br/>DEPENDENCY: Private DNS Zone(s) must exist.<br/><br/>Attributes:<br/>  - name: Name for the DNS zone group.<br/>  - private\_dns\_zone\_ids: List of Private DNS Zone IDs. | <pre>object({<br/>    name                 = optional(string, "default")<br/>    private_dns_zone_ids = list(string)<br/>  })</pre> | `null` | no |
+| <a name="input_private_service_connection"></a> [private\_service\_connection](#input\_private\_service\_connection) | (Required) The private service connection configuration.<br/>DEPENDENCY: Target resource must exist and support private endpoints.<br/><br/>Attributes:<br/>  - name: A name for the private service connection.<br/>  - private\_connection\_resource\_id: The ID of the resource to connect to.<br/>  - is\_manual\_connection: Whether manual approval is required (false for owned resources).<br/>  - subresource\_names: List of subresource names (e.g., ["blob"], ["sqlServer"]).<br/>  - request\_message: Request message for manual connections. | <pre>object({<br/>    name                           = optional(string, "psc")<br/>    private_connection_resource_id = string<br/>    is_manual_connection           = optional(bool, false)<br/>    subresource_names              = optional(list(string), null)<br/>    request_message                = optional(string, null)<br/>  })</pre> | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Private Endpoint will be created.<br/>DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | (Required) The ID of the Subnet where the Private Endpoint will be created.<br/>DEPENDENCY: Subnet must exist with private endpoint policies disabled. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to resources. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) Workload name for naming convention. | `string` | `"default"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_fqdn"></a> [fqdn](#output\_fqdn) | The FQDNs from custom DNS configs. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Private Endpoint. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Private Endpoint. |
+| <a name="output_network_interface_id"></a> [network\_interface\_id](#output\_network\_interface\_id) | The ID of the network interface. |
+| <a name="output_network_interface_name"></a> [network\_interface\_name](#output\_network\_interface\_name) | The name of the network interface. |
+| <a name="output_private_ip_address"></a> [private\_ip\_address](#output\_private\_ip\_address) | The private IP address of the Private Endpoint. |
+| <a name="output_private_ip_addresses"></a> [private\_ip\_addresses](#output\_private\_ip\_addresses) | All private IP addresses of the Private Endpoint. |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | The name of the Resource Group. |
+| <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | The ID of the Subnet. |
+<!-- END_TF_DOCS -->

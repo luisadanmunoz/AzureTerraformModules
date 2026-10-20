@@ -236,3 +236,56 @@ This module manages the Storage Sync Service, Sync Groups, and Cloud Endpoints. 
 - Server Endpoints require the Azure File Sync agent and are registered separately
 - Cloud Endpoints can only be created after the Storage Sync Service and Sync Group exist
 - The Storage Account must be in the same region as the Storage Sync Service for optimal performance
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_storage_sync.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync) | resource |
+| [azurerm_storage_sync_cloud_endpoint.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync_cloud_endpoint) | resource |
+| [azurerm_storage_sync_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_sync_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_cloud_endpoints"></a> [cloud\_endpoints](#input\_cloud\_endpoints) | (Optional) A map of Cloud Endpoints to create for the Sync Groups.<br/>DEPENDENCY: Storage Account and File Share must exist before creating Cloud Endpoints.<br/><br/>Attributes:<br/>  - sync\_group\_key: (Required) The key from sync\_groups map to associate this endpoint with.<br/>  - file\_share\_name: (Required) The name of the Azure File Share to sync.<br/>  - storage\_account\_id: (Required) The ID of the Storage Account containing the File Share.<br/>  - storage\_account\_tenant\_id: (Optional) The Tenant ID of the Storage Account. Defaults to current tenant.<br/><br/>Example:<br/>  cloud\_endpoints = {<br/>    "ce1" = {<br/>      sync\_group\_key            = "sg1"<br/>      file\_share\_name           = "myfileshare"<br/>      storage\_account\_id        = "/subscriptions/.../storageAccounts/mystorageaccount"<br/>      storage\_account\_tenant\_id = null<br/>    }<br/>  } | <pre>map(object({<br/>    sync_group_key            = string<br/>    file_share_name           = string<br/>    storage_account_id        = string<br/>    storage_account_tenant_id = optional(string, null)<br/>  }))</pre> | `{}` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Storage Sync resources. Set to false to disable resource creation without removing module code. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) The environment name (e.g., dev, staging, prod), used for naming convention. | `string` | `"dev"` | no |
+| <a name="input_incoming_traffic_policy"></a> [incoming\_traffic\_policy](#input\_incoming\_traffic\_policy) | (Optional) Incoming Traffic Policy for the Storage Sync. Valid options are AllowAllTraffic and AllowVirtualNetworksOnly. | `string` | `"AllowAllTraffic"` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number or identifier for naming convention. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure region where the Storage Sync will be deployed.<br/>DEPENDENCY: Should match the Resource Group location for optimal performance. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The explicit name for the Storage Sync. If provided, overrides name\_prefix/workload/environment/instance logic. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix to prepend to the generated Storage Sync name. Used when 'name' is not provided. Default is 'ss'. | `string` | `"ss"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group where the Storage Sync will be created.<br/>DEPENDENCY: Resource Group must exist before creating the Storage Sync. | `string` | n/a | yes |
+| <a name="input_sync_groups"></a> [sync\_groups](#input\_sync\_groups) | (Optional) A map of Sync Groups to create within the Storage Sync Service.<br/><br/>Attributes:<br/>  - name: (Required) The name of the Sync Group.<br/><br/>Example:<br/>  sync\_groups = {<br/>    "sg1" = {<br/>      name = "my-sync-group-1"<br/>    }<br/>    "sg2" = {<br/>      name = "my-sync-group-2"<br/>    }<br/>  } | <pre>map(object({<br/>    name = string<br/>  }))</pre> | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A map of tags to assign to the Storage Sync resources. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) The workload or application name, used for naming convention. | `string` | `"shared"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_cloud_endpoint_ids"></a> [cloud\_endpoint\_ids](#output\_cloud\_endpoint\_ids) | A map of Cloud Endpoint keys to their IDs. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Storage Sync Service. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Storage Sync Service. |
+| <a name="output_sync_group_ids"></a> [sync\_group\_ids](#output\_sync\_group\_ids) | A map of Sync Group names to their IDs. |
+<!-- END_TF_DOCS -->

@@ -372,3 +372,72 @@ El pricing de Log Analytics se basa en:
 │  - Events     │  │               │  │               │
 └───────────────┘  └───────────────┘  └───────────────┘
 ```
+
+<!-- BEGIN_TF_DOCS -->
+# Azure Log Analytics Workspace Module
+
+Modulo reutilizable para crear Log Analytics Workspaces en Azure.
+Incluye configuracion de retencion, soluciones y data collection rules.
+
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_log_analytics_solution.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_solution) | resource |
+| [azurerm_log_analytics_workspace.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_monitor_action_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
+| [azurerm_monitor_data_collection_rule.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_data_collection_rule) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_action_group_emails"></a> [action\_group\_emails](#input\_action\_group\_emails) | Lista de emails para el action group | <pre>list(object({<br/>    name  = string<br/>    email = string<br/>  }))</pre> | `[]` | no |
+| <a name="input_create_action_group"></a> [create\_action\_group](#input\_create\_action\_group) | Crear Action Group para alertas | `bool` | `false` | no |
+| <a name="input_create_data_collection_rule"></a> [create\_data\_collection\_rule](#input\_create\_data\_collection\_rule) | Crear Data Collection Rule para VMs | `bool` | `false` | no |
+| <a name="input_daily_quota_gb"></a> [daily\_quota\_gb](#input\_daily\_quota\_gb) | Cuota diaria de ingestion en GB (-1 para ilimitado) | `number` | `-1` | no |
+| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tags por defecto | `map(string)` | <pre>{<br/>  "ManagedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_internet_ingestion_enabled"></a> [internet\_ingestion\_enabled](#input\_internet\_ingestion\_enabled) | Permitir ingestion desde internet | `bool` | `true` | no |
+| <a name="input_internet_query_enabled"></a> [internet\_query\_enabled](#input\_internet\_query\_enabled) | Permitir queries desde internet | `bool` | `true` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region de Azure | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Nombre del Log Analytics Workspace | `string` | n/a | yes |
+| <a name="input_performance_counters"></a> [performance\_counters](#input\_performance\_counters) | Contadores de rendimiento a recolectar | `list(string)` | <pre>[<br/>  "Processor(*)\\% Processor Time",<br/>  "Memory(*)\\% Used Memory",<br/>  "LogicalDisk(*)\\% Free Space",<br/>  "Network(*)\\Total Bytes Transmitted",<br/>  "Network(*)\\Total Bytes Received"<br/>]</pre> | no |
+| <a name="input_performance_sampling_frequency"></a> [performance\_sampling\_frequency](#input\_performance\_sampling\_frequency) | Frecuencia de muestreo en segundos | `number` | `60` | no |
+| <a name="input_reservation_capacity_in_gb_per_day"></a> [reservation\_capacity\_in\_gb\_per\_day](#input\_reservation\_capacity\_in\_gb\_per\_day) | Capacidad reservada por dia (solo para SKU CapacityReservation) | `number` | `null` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | Nombre del Resource Group | `string` | n/a | yes |
+| <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | Dias de retencion de logs | `number` | `30` | no |
+| <a name="input_sku"></a> [sku](#input\_sku) | SKU del workspace (Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, PerGB2018) | `string` | `"PerGB2018"` | no |
+| <a name="input_solutions"></a> [solutions](#input\_solutions) | Lista de solutions a habilitar | <pre>list(object({<br/>    solution_name = string<br/>    publisher     = string<br/>    product       = string<br/>  }))</pre> | <pre>[<br/>  {<br/>    "product": "OMSGallery/VMInsights",<br/>    "publisher": "Microsoft",<br/>    "solution_name": "VMInsights"<br/>  },<br/>  {<br/>    "product": "OMSGallery/SecurityInsights",<br/>    "publisher": "Microsoft",<br/>    "solution_name": "SecurityInsights"<br/>  }<br/>]</pre> | no |
+| <a name="input_syslog_facilities"></a> [syslog\_facilities](#input\_syslog\_facilities) | Facilities de syslog a recolectar | `list(string)` | <pre>[<br/>  "auth",<br/>  "authpriv",<br/>  "cron",<br/>  "daemon",<br/>  "kern",<br/>  "syslog"<br/>]</pre> | no |
+| <a name="input_syslog_levels"></a> [syslog\_levels](#input\_syslog\_levels) | Niveles de syslog a recolectar | `list(string)` | <pre>[<br/>  "Alert",<br/>  "Critical",<br/>  "Emergency",<br/>  "Error",<br/>  "Warning"<br/>]</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags adicionales | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_action_group_id"></a> [action\_group\_id](#output\_action\_group\_id) | ID del Action Group |
+| <a name="output_data_collection_rule_id"></a> [data\_collection\_rule\_id](#output\_data\_collection\_rule\_id) | ID del Data Collection Rule |
+| <a name="output_id"></a> [id](#output\_id) | ID del Log Analytics Workspace |
+| <a name="output_location"></a> [location](#output\_location) | Ubicacion del workspace |
+| <a name="output_name"></a> [name](#output\_name) | Nombre del workspace |
+| <a name="output_primary_shared_key"></a> [primary\_shared\_key](#output\_primary\_shared\_key) | Clave primaria del workspace |
+| <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Resource Group del workspace |
+| <a name="output_secondary_shared_key"></a> [secondary\_shared\_key](#output\_secondary\_shared\_key) | Clave secundaria del workspace |
+| <a name="output_solution_ids"></a> [solution\_ids](#output\_solution\_ids) | IDs de las solutions instaladas |
+| <a name="output_workspace_id"></a> [workspace\_id](#output\_workspace\_id) | Workspace ID (GUID) |
+<!-- END_TF_DOCS -->

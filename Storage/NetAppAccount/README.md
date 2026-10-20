@@ -173,3 +173,52 @@ module "netapp_account_uai" {
 ## License
 
 This module is released under the MIT License.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_netapp_account.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/netapp_account) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_active_directory"></a> [active\_directory](#input\_active\_directory) | Active Directory configuration for the NetApp Account. Required for SMB volumes.<br/>- dns\_servers: List of DNS server IP addresses for Active Directory domain resolution.<br/>- domain: The Active Directory domain name.<br/>- username: The username of the Active Directory domain administrator.<br/>- password: The password of the Active Directory domain administrator.<br/>- smb\_server\_name: The NetBIOS name of the SMB server.<br/>- organizational\_unit: The Organizational Unit (OU) path in Active Directory.<br/>- kerberos\_ad\_name: Name of the Active Directory machine account for Kerberos.<br/>- kerberos\_kdc\_ip: IP address of the Kerberos Key Distribution Center.<br/>- aes\_encryption\_enabled: Specifies whether AES encryption is enabled for SMB.<br/>- local\_nfs\_users\_with\_ldap\_allowed: Allow local NFS users with LDAP.<br/>- ldap\_over\_tls\_enabled: Specifies whether LDAP over TLS is enabled.<br/>- server\_root\_ca\_certificate: Server root CA certificate for LDAP over TLS.<br/>- ldap\_signing\_enabled: Specifies whether LDAP signing is enabled. | <pre>object({<br/>    dns_servers                       = list(string)<br/>    domain                            = string<br/>    username                          = string<br/>    password                          = string<br/>    smb_server_name                   = string<br/>    organizational_unit               = optional(string)<br/>    kerberos_ad_name                  = optional(string)<br/>    kerberos_kdc_ip                   = optional(string)<br/>    aes_encryption_enabled            = optional(bool)<br/>    local_nfs_users_with_ldap_allowed = optional(bool)<br/>    ldap_over_tls_enabled             = optional(bool)<br/>    server_root_ca_certificate        = optional(string)<br/>    ldap_signing_enabled              = optional(bool)<br/>  })</pre> | `null` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether the NetApp Account should be created. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name to include in the generated name (e.g., dev, staging, prod). | `string` | `null` | no |
+| <a name="input_identity"></a> [identity](#input\_identity) | Identity configuration for the NetApp Account.<br/>- type: The identity type. Possible values are SystemAssigned and UserAssigned.<br/>- identity\_ids: List of User Assigned Identity IDs to assign to the NetApp Account. | <pre>object({<br/>    type         = string<br/>    identity_ids = optional(list(string))<br/>  })</pre> | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | The instance identifier to include in the generated name. | `string` | `null` | no |
+| <a name="input_location"></a> [location](#input\_location) | The Azure region where the NetApp Account will be created. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the NetApp Account. If provided, overrides the generated name. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Prefix to use for the generated NetApp Account name. | `string` | `"anf"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which to create the NetApp Account. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to the NetApp Account. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | The workload name to include in the generated name. | `string` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the NetApp Account. |
+| <a name="output_location"></a> [location](#output\_location) | The Azure region where the NetApp Account is located. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the NetApp Account. |
+<!-- END_TF_DOCS -->

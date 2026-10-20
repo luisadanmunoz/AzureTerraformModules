@@ -71,3 +71,55 @@ module "management_groups" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de grupos de administración en Azure.
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_group.Connectivity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.Identity](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.Intermediate_Root](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.Landing_Zones](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.Management](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.Platform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_group) | resource |
+| [azurerm_management_group.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/management_group) | data source |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_name_management_group_Connectivity"></a> [name\_management\_group\_Connectivity](#input\_name\_management\_group\_Connectivity) | value of the name tag | `string` | n/a | yes |
+| <a name="input_name_management_group_Identity"></a> [name\_management\_group\_Identity](#input\_name\_management\_group\_Identity) | value of the name tag | `string` | n/a | yes |
+| <a name="input_name_management_group_Intermediate_Root"></a> [name\_management\_group\_Intermediate\_Root](#input\_name\_management\_group\_Intermediate\_Root) | value of the name tag | `string` | n/a | yes |
+| <a name="input_name_management_group_Landing_Zones"></a> [name\_management\_group\_Landing\_Zones](#input\_name\_management\_group\_Landing\_Zones) | value of the name tag | `string` | n/a | yes |
+| <a name="input_name_management_group_Management"></a> [name\_management\_group\_Management](#input\_name\_management\_group\_Management) | value of the name tag | `string` | n/a | yes |
+| <a name="input_name_management_group_Platform"></a> [name\_management\_group\_Platform](#input\_name\_management\_group\_Platform) | value of the name tag | `string` | n/a | yes |
+| <a name="input_subscription_ids_Connectivity"></a> [subscription\_ids\_Connectivity](#input\_subscription\_ids\_Connectivity) | value of the subscription id tag | `set(string)` | `null` | no |
+| <a name="input_subscription_ids_Identity"></a> [subscription\_ids\_Identity](#input\_subscription\_ids\_Identity) | value of the subscription id tag | `set(string)` | `null` | no |
+| <a name="input_subscription_ids_Intermediate_Root"></a> [subscription\_ids\_Intermediate\_Root](#input\_subscription\_ids\_Intermediate\_Root) | value of the subscription id tag | `set(string)` | `null` | no |
+| <a name="input_subscription_ids_Landing_Zones"></a> [subscription\_ids\_Landing\_Zones](#input\_subscription\_ids\_Landing\_Zones) | value of the subscription id tag | `set(string)` | `null` | no |
+| <a name="input_subscription_ids_Management"></a> [subscription\_ids\_Management](#input\_subscription\_ids\_Management) | value of the subscription id tag | `set(string)` | `null` | no |
+| <a name="input_subscription_ids_Platform"></a> [subscription\_ids\_Platform](#input\_subscription\_ids\_Platform) | value of the subscription id tag | `set(string)` | `null` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Management Group. |
+| <a name="output_name"></a> [name](#output\_name) | value of the name tag |
+<!-- END_TF_DOCS -->

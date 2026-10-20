@@ -119,3 +119,51 @@ module "network_watcher" {
 - Flow Logs require a Storage Account in the same region as the NSG.
 - Traffic Analytics requires a Log Analytics workspace and increases cost based on the processing interval.
 - Flow Log version 2 provides additional fields including bytes and packets per flow.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_network_watcher.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher) | resource |
+| [azurerm_network_watcher_flow_log.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_watcher_flow_log) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the Network Watcher. | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Environment name. | `string` | `"prod"` | no |
+| <a name="input_flow_logs"></a> [flow\_logs](#input\_flow\_logs) | (Optional) List of NSG Flow Log configurations. | <pre>list(object({<br/>    name                      = string<br/>    network_security_group_id = string<br/>    storage_account_id        = string<br/>    enabled                   = optional(bool, true)<br/>    retention_policy_enabled  = optional(bool, true)<br/>    retention_policy_days     = optional(number, 90)<br/>    version                   = optional(number, 2)<br/><br/>    traffic_analytics_enabled                 = optional(bool, false)<br/>    traffic_analytics_workspace_id            = optional(string, null)<br/>    traffic_analytics_workspace_region        = optional(string, null)<br/>    traffic_analytics_workspace_resource_id   = optional(string, null)<br/>    traffic_analytics_interval_in_minutes     = optional(number, 60)<br/>  }))</pre> | `[]` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance identifier. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) Azure region. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) Explicit name for the Network Watcher. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix for generated name. | `string` | `"nw"` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) Resource Group name. DEPENDENCY: Must exist. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) Tags to assign to resources. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) Workload name. | `string` | `"shared"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Network Watcher. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Network Watcher. |
+<!-- END_TF_DOCS -->

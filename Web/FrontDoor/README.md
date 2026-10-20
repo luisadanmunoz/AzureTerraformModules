@@ -50,3 +50,47 @@ module "front_door" {
 | id | The profile ID |
 | name | The profile name |
 | resource_guid | The profile UUID |
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_cdn_frontdoor_profile.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_profile) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_create"></a> [create](#input\_create) | Whether to create the Front Door Profile. | `bool` | `true` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the Front Door Profile. | `string` | n/a | yes |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group. | `string` | n/a | yes |
+| <a name="input_response_timeout_seconds"></a> [response\_timeout\_seconds](#input\_response\_timeout\_seconds) | The maximum response timeout in seconds. | `number` | `120` | no |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | The SKU name. Possible values: Standard\_AzureFrontDoor, Premium\_AzureFrontDoor. | `string` | `"Standard_AzureFrontDoor"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to apply to the resource. | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Front Door Profile. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Front Door Profile. |
+| <a name="output_resource_guid"></a> [resource\_guid](#output\_resource\_guid) | The UUID of the Front Door Profile. |
+<!-- END_TF_DOCS -->

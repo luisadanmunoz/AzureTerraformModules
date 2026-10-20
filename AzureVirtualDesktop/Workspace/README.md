@@ -169,3 +169,56 @@ module "workspace_finance" {
 - Workspaces are what users see in the AVD clients (Windows, Web, macOS, iOS, Android)
 - Each Application Group can only be associated with one Workspace
 - Users need appropriate RBAC permissions to access the Workspace
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.70.0, < 5.0.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_virtual_desktop_workspace.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_desktop_workspace) | resource |
+| [azurerm_virtual_desktop_workspace_application_group_association.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_desktop_workspace_application_group_association) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_application_group_ids"></a> [application\_group\_ids](#input\_application\_group\_ids) | (Optional) List of Application Group IDs to associate. DEPENDENCY: Application Groups must exist. | `list(string)` | `[]` | no |
+| <a name="input_create"></a> [create](#input\_create) | Controls whether to create the AVD Workspace. | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | (Optional) A description for the Workspace. | `string` | `null` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | (Optional) Environment name (e.g., dev, staging, prod). | `string` | `"dev"` | no |
+| <a name="input_friendly_name"></a> [friendly\_name](#input\_friendly\_name) | (Optional) A friendly name for the Workspace displayed to users. | `string` | `null` | no |
+| <a name="input_instance"></a> [instance](#input\_instance) | (Optional) Instance number for the naming convention. | `string` | `"001"` | no |
+| <a name="input_location"></a> [location](#input\_location) | (Required) The Azure Region where the Workspace should exist. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) The name of the Workspace. If not provided, a name will be generated. | `string` | `null` | no |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | (Optional) Prefix for the generated name. Default: 'vdws'. | `string` | `"vdws"` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Whether public network access is enabled. Default: true. | `bool` | `true` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the Resource Group. DEPENDENCY: Resource Group must exist. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Optional) A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
+| <a name="input_workload"></a> [workload](#input\_workload) | (Optional) Workload name for the naming convention. | `string` | `"avd"` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_associated_application_group_ids"></a> [associated\_application\_group\_ids](#output\_associated\_application\_group\_ids) | The list of Application Group IDs associated with this Workspace. |
+| <a name="output_friendly_name"></a> [friendly\_name](#output\_friendly\_name) | The friendly name of the Workspace. |
+| <a name="output_id"></a> [id](#output\_id) | The ID of the AVD Workspace. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the AVD Workspace. |
+<!-- END_TF_DOCS -->

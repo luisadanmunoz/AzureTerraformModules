@@ -49,3 +49,42 @@ module "forwarding_rule" {
 ## Autor
 
 Este módulo ha sido desarrollado para la gestión de reglas de reenvío en Private DNS Resolver en Azure.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_private_dns_resolver_forwarding_rule.forwarding_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_resolver_forwarding_rule) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_dns_forwarding_ruleset"></a> [dns\_forwarding\_ruleset](#input\_dns\_forwarding\_ruleset) | n/a | `string` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | n/a | `string` | n/a | yes |
+| <a name="input_enabled"></a> [enabled](#input\_enabled) | n/a | `string` | n/a | yes |
+| <a name="input_ip_address"></a> [ip\_address](#input\_ip\_address) | n/a | `string` | n/a | yes |
+| <a name="input_ip_address2"></a> [ip\_address2](#input\_ip\_address2) | n/a | `string` | n/a | yes |
+| <a name="input_name_forwarding_rule"></a> [name\_forwarding\_rule](#input\_name\_forwarding\_rule) | ############################################################################ PRIVATE DNS RESOLVER - FORWADING RULE VARIABLES ############################################################################ | `string` | n/a | yes |
+| <a name="input_port"></a> [port](#input\_port) | n/a | `string` | n/a | yes |
+| <a name="input_port2"></a> [port2](#input\_port2) | n/a | `string` | n/a | yes |
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->

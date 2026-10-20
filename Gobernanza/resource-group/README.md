@@ -134,3 +134,52 @@ module "vnet" {
   address_space       = ["10.0.0.0/16"]
 }
 ```
+
+<!-- BEGIN_TF_DOCS -->
+# Azure Resource Group Module
+
+Modulo reutilizable para crear Resource Groups en Azure.
+Incluye soporte para tags, locks y configuracion de ubicacion.
+
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+| ---- | ------- |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+| ---- | ---- |
+| [azurerm_management_lock.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
+| [azurerm_resource_group.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+| ---- | ----------- | ---- | ------- | :------: |
+| <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags) | Tags por defecto aplicados a todos los recursos | `map(string)` | <pre>{<br/>  "ManagedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_enable_lock"></a> [enable\_lock](#input\_enable\_lock) | Habilitar lock de eliminacion en el Resource Group | `bool` | `false` | no |
+| <a name="input_location"></a> [location](#input\_location) | Region de Azure donde se creara el Resource Group | `string` | `"westeurope"` | no |
+| <a name="input_lock_level"></a> [lock\_level](#input\_lock\_level) | Nivel del lock (CanNotDelete o ReadOnly) | `string` | `"CanNotDelete"` | no |
+| <a name="input_lock_notes"></a> [lock\_notes](#input\_lock\_notes) | Notas descriptivas para el lock | `string` | `"Resource Group protegido contra eliminacion accidental"` | no |
+| <a name="input_name"></a> [name](#input\_name) | Nombre del Resource Group | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags adicionales para el Resource Group | `map(string)` | `{}` | no |
+
+## Outputs
+
+| Name | Description |
+| ---- | ----------- |
+| <a name="output_id"></a> [id](#output\_id) | ID del Resource Group |
+| <a name="output_location"></a> [location](#output\_location) | Ubicacion del Resource Group |
+| <a name="output_name"></a> [name](#output\_name) | Nombre del Resource Group |
+| <a name="output_tags"></a> [tags](#output\_tags) | Tags aplicados al Resource Group |
+<!-- END_TF_DOCS -->
